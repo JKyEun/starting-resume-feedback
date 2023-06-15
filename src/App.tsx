@@ -1,10 +1,12 @@
 import React from 'react';
-import Header from './components/Header';
+import MainHeader from './components/MainHeader';
+import SubHeader from './components/SubHeader';
 
 function App() {
   return (
     <div className="App">
-      <Header />
+      <MainHeader />
+      <SubHeader />
     </div>
   );
 }
