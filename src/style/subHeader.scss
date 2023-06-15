@@ -1,0 +1,31 @@
+.sub-header-area {
+  position: relative;
+  top: 56px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 56px;
+  background-color: #aaa;
+  .sub-header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1080px;
+    .menu-container {
+      display: flex;
+      justify-content: space-between;
+      width: 400px;
+      .menu {
+        font-size: 16px;
+        font-weight: 500;
+      }
+      .menu.selected {
+        font-weight: 700;
+      }
+      .menu:hover {
+        font-weight: 700;
+        cursor: pointer;
+      }
+    }
+  }
+}

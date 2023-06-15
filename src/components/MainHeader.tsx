@@ -1,7 +1,7 @@
 import React from 'react';
-import '../style/header.scss';
+import '../style/mainHeader.scss';
 
-export default function Header() {
+export default function MainHeader() {
   return (
     <div className="header-area">
       <div className="header-container">
