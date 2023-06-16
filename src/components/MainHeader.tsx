@@ -1,5 +1,6 @@
 import React from 'react';
 import '../style/mainHeader.scss';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
 
@@ -21,7 +22,9 @@ export default function MainHeader() {
             <span className="menu">마이페이지</span>
           </div>
         ) : (
-          <div className="login-container">로그인 ∙ 회원가입</div>
+          <Link to="/login">
+            <div className="login-btn">로그인 ∙ 회원가입</div>
+          </Link>
         )}
       </div>
     </div>
