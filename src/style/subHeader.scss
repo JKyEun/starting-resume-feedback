@@ -1,6 +1,4 @@
 .sub-header-area {
-  position: relative;
-  top: 56px;
   display: flex;
   justify-content: center;
   width: 100%;
@@ -25,6 +23,15 @@
       .menu:hover {
         font-weight: 700;
         cursor: pointer;
+      }
+    }
+    .search-area {
+      background-color: #f4f4f5;
+      width: 300px;
+      border-radius: 5px;
+      input {
+        border: none;
+        background-color: transparent;
       }
     }
   }
