@@ -3,6 +3,8 @@ import { Route, Routes, useLocation } from 'react-router';
 import MainHeader from './components/MainHeader';
 import SubHeader from './components/SubHeader';
 import SignInPage from './pages/SignInPage';
+import MainPage from './pages/MainPage';
+import MentorCard from './components/MentorCard';
 
 function App() {
   const location = useLocation();
@@ -13,7 +15,9 @@ function App() {
       {location.pathname !== '/login' && <SubHeader />}
       <Routes>
         <Route path="/login" element={<SignInPage />} />
+        <Route path="/" element={<MainPage />} />
       </Routes>
+      <MentorCard />
     </div>
   );
 }

@@ -27,12 +27,23 @@
       }
     }
     .search-area {
+      display: flex;
       background-color: #f4f4f5;
-      width: 300px;
-      border-radius: 5px;
+      width: 278px;
+      height: 40px;
+      border-radius: 10px;
+      img {
+        width: 24px;
+        margin: 8px;
+      }
       input {
         border: none;
         background-color: transparent;
+        outline: none;
+        color: #535353;
+        font-weight: 500;
+        width: 100%;
+        padding: 5px;
       }
     }
   }
