@@ -1,0 +1,58 @@
+.mentor-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 250px;
+  height: 359px;
+  border: 2px solid #e1e2e4;
+  border-radius: 15px;
+  padding: 25px 20px;
+  .intro-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    .profile-img {
+      border-radius: 50%;
+    }
+  }
+  .mentor-name {
+    font-size: 15px;
+  }
+  .mentor-company {
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .job-wrap {
+    font-size: 14px;
+    color: #535353;
+  }
+  .explain {
+    font-size: 14px;
+  }
+  .divide {
+    margin: 10px 0;
+    border: 1px solid #e1e2e4;
+  }
+  .review-wrap {
+    display: flex;
+    font-size: 15px;
+    font-weight: 600;
+    img {
+      margin-right: 3px;
+    }
+    span:last-child {
+      margin-left: 10px;
+    }
+  }
+  .personality-wrap {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    span {
+      color: #1a7cff;
+      border: 1px solid #92aeff;
+      padding: 3px 6px;
+      border-radius: 7px;
+    }
+  }
+}
