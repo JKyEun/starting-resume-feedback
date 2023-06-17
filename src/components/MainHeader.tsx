@@ -1,11 +1,10 @@
 import React from 'react';
 import '../style/mainHeader.scss';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { RootState } from '../store';
+import { useAppSelector } from '../store';
 
 export default function MainHeader() {
-  const isLogin = useSelector((state: RootState) => state.isLogin.value);
+  const isLogin = useAppSelector((state) => state.auth.isLogin);
 
   return (
     <div className="header-area">
