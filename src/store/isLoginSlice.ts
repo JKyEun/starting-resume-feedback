@@ -12,10 +12,10 @@ const isLoginSlice = createSlice({
   name: 'isLogin',
   initialState,
   reducers: {
-    login: state => {
+    login: (state) => {
       state.value = true;
     },
-    logout: state => {
+    logout: (state) => {
       state.value = false;
     },
   },
