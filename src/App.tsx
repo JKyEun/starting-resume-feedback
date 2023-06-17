@@ -1,18 +1,16 @@
 import React, { useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router';
-import { useDispatch } from 'react-redux';
 import MainHeader from './components/MainHeader';
 import SubHeader from './components/SubHeader';
 import SignInPage from './pages/SignInPage';
 import MainPage from './pages/MainPage';
 import MentorCard from './components/MentorCard';
 import KakaoRedirectHandler from './components/KakaoRedirectHandler';
-import { login } from './store/isLoginSlice';
-import { AppDispatch } from './store';
+import { login, useAppDispatch } from './store';
 
 function App() {
   const location = useLocation();
-  const dispatch: AppDispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (localStorage.getItem('JWT_TOKEN')) {

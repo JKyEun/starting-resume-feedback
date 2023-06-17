@@ -1,15 +1,14 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { GRANT_TYPE, KAKAO_CLIENT_ID, KAKAO_REDIRECT_URI } from '../util/constant';
 import { LoginInfo } from '../types/user';
 import { kakaoLogin } from '../apis/user';
 import Loading from './Loading';
-import { login } from '../store/isLoginSlice';
+import { login, useAppDispatch } from '../store';
 
 export default function KakaoRedirectHandler() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const CODE = new URL(window.location.href).searchParams.get('code');
