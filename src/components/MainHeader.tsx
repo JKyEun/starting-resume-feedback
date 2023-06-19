@@ -1,10 +1,19 @@
 import React from 'react';
 import '../style/mainHeader.scss';
-import { Link } from 'react-router-dom';
-import { useAppSelector } from '../store';
+import { Link, useNavigate } from 'react-router-dom';
+import { logout, useAppDispatch, useAppSelector } from '../store';
 
 export default function MainHeader() {
   const isLogin = useAppSelector((state) => state.auth.isLogin);
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const logoutInHeader = () => {
+    localStorage.removeItem('USER_ID');
+    localStorage.removeItem('JWT_TOKEN');
+    navigate('/');
+    dispatch(logout());
+  };
 
   return (
     <div className="header-area">
@@ -18,7 +27,9 @@ export default function MainHeader() {
           <div className="menu-container">
             <span className="menu">내 이력서</span>
             <span className="menu selected">멘토링</span>
-            <span className="menu">마이페이지</span>
+            <span onClick={logoutInHeader} className="menu">
+              로그아웃
+            </span>
           </div>
         ) : (
           <Link to="/login">
