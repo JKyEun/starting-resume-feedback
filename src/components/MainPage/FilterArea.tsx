@@ -1,7 +1,7 @@
 import React from 'react';
 import CategoryFilter from './CategoryFilter';
-import { companyClass, mentoYear } from '../util/constant';
-import '../style/filterArea.scss';
+import { companyClass, mentoYear } from '../../util/constant';
+import '../../style/filterArea.scss';
 import JobFilter from './JobFilter';
 
 export default function FilterArea() {

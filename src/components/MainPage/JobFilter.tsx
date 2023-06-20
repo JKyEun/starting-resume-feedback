@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { jobClass } from '../util/constant';
+import { jobClass } from '../../util/constant';
 import CategoryCheckbox from './CategoryCheckbox';
 
 export default function JobFilter() {

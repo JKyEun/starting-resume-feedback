@@ -20,10 +20,11 @@
     }
     .dropdown {
       position: absolute;
+      background-color: #fff;
       width: 300px;
       margin-top: 10px;
       border-radius: 5px;
-      box-shadow: 0 10px 20px #b3b3b3, 0 6px 6px #b3b3b3;
+      box-shadow: 0 4px 10px #b3b3b3, 0 4px 4px #b3b3b3;
       .list {
         padding: 17px;
         .check-list {

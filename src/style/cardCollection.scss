@@ -1,0 +1,14 @@
+.card-collection {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  .inner {
+    width: 1080px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    .mentor-card {
+      margin-bottom: 30px;
+    }
+  }
+}
