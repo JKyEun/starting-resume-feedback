@@ -4,11 +4,8 @@ import MainHeader from './components/MainHeader';
 import SubHeader from './components/SubHeader';
 import SignInPage from './pages/SignInPage';
 import MainPage from './pages/MainPage';
-import MentorCard from './components/MentorCard';
 import KakaoRedirectHandler from './components/KakaoRedirectHandler';
 import { login, useAppDispatch } from './store';
-import CategoryFilter from './components/CategoryFilter';
-import { companyClass } from './util/constant';
 
 function App() {
   const location = useLocation();
