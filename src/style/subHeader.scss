@@ -1,3 +1,5 @@
+$menu-width: 200px;
+
 .sub-header-area {
   margin-top: 56px;
   display: flex;
@@ -13,7 +15,7 @@
     .menu-container {
       display: flex;
       justify-content: space-between;
-      width: 400px;
+      width: $menu-width;
       .menu {
         font-size: 16px;
         font-weight: 500;

@@ -27,6 +27,7 @@ export default function MainHeader() {
           <div className="menu-container">
             <span className="menu">내 이력서</span>
             <span className="menu selected">멘토링</span>
+            <span className="menu">멘토 지원</span>
             <span onClick={logoutInHeader} className="menu">
               로그아웃
             </span>

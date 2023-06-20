@@ -1,0 +1,73 @@
+.filterArea {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  .inner {
+    display: flex;
+    width: 1080px;
+    .dropdown-btn {
+      display: inline-block;
+      border: 1px solid #b3b3b3;
+      padding: 10px;
+      border-radius: 7px;
+      margin-right: 15px;
+      img {
+        margin-left: 7px;
+      }
+    }
+    .dropdown-btn.clicked {
+      border: 1px solid black;
+    }
+    .dropdown {
+      position: absolute;
+      width: 300px;
+      margin-top: 10px;
+      border-radius: 5px;
+      box-shadow: 0 10px 20px #b3b3b3, 0 6px 6px #b3b3b3;
+      .list {
+        padding: 17px;
+        .check-list {
+          height: 30px;
+          display: flex;
+          align-items: center;
+          .checkbox {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            background-color: #fff;
+            border: 1.8px solid #b3b3b3;
+            border-radius: 2px;
+            margin-right: 10px;
+          }
+          .checkbox.checked {
+            border: none;
+          }
+        }
+      }
+      .btns {
+        border-top: 1px solid #eeeff1;
+        padding: 12px;
+        display: flex;
+        justify-content: flex-end;
+        .cancel-btn {
+          width: 90px;
+          height: 43px;
+          background-color: #f4f4f5;
+          font-size: 16px;
+          border-radius: 5px;
+          border: none;
+          margin-right: 10px;
+        }
+        .complete-btn {
+          width: 108px;
+          height: 43px;
+          background-color: #8621f6;
+          color: #fff;
+          font-size: 16px;
+          border-radius: 5px;
+          border: none;
+        }
+      }
+    }
+  }
+}
