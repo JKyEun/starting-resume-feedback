@@ -7,7 +7,6 @@ import Loading from '../Loading';
 
 export default function CardCollection() {
   const { data, isLoading } = useQuery('mentors', getMentors);
-  console.log(data);
 
   if (isLoading) return <Loading />;
 
