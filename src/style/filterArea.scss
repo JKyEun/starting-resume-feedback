@@ -7,13 +7,24 @@
     width: 1080px;
     .dropdown-btn {
       display: inline-block;
+      position: relative;
       border: 1px solid #b3b3b3;
       padding: 10px;
+      width: 140px;
+      cursor: pointer;
       border-radius: 7px;
       margin-right: 15px;
       img {
-        margin-left: 7px;
+        position: absolute;
+        right: 10px;
+        top: 15px;
       }
+      .selected-title {
+        color: #1a7cff;
+      }
+    }
+    .dropdown-btn.job {
+      width: 105px;
     }
     .dropdown-btn.clicked {
       border: 1px solid black;
@@ -26,9 +37,9 @@
       border-radius: 5px;
       box-shadow: 0 4px 10px #b3b3b3, 0 4px 4px #b3b3b3;
       .list {
-        padding: 17px;
+        padding: 20px;
         .check-list {
-          height: 30px;
+          height: 35px;
           display: flex;
           align-items: center;
           .checkbox {
@@ -42,6 +53,7 @@
           }
           .checkbox.checked {
             border: none;
+            background-image: url('../../public/images/checked.svg');
           }
         }
       }
@@ -51,6 +63,7 @@
         display: flex;
         justify-content: flex-end;
         .cancel-btn {
+          cursor: pointer;
           width: 90px;
           height: 43px;
           background-color: #f4f4f5;
@@ -60,13 +73,31 @@
           margin-right: 10px;
         }
         .complete-btn {
+          cursor: pointer;
           width: 108px;
           height: 43px;
-          background-color: #8621f6;
+          background-color: #1a7cff;
           color: #fff;
           font-size: 16px;
           border-radius: 5px;
           border: none;
+        }
+      }
+    }
+    .dropdown.job {
+      width: 680px;
+      .list.job {
+        display: flex;
+        padding: 0px;
+        .job-folder {
+          padding: 10px 60px 10px 20px;
+          border-right: 1px solid #eeeff1;
+        }
+        .none-job {
+          width: 461px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
       }
     }

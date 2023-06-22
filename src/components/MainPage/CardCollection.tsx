@@ -7,7 +7,6 @@ import Loading from '../Loading';
 
 export default function CardCollection() {
   const { data, isLoading } = useQuery('mentors', getMentors);
-  console.log(data);
 
   if (isLoading) return <Loading />;
 
@@ -16,6 +15,7 @@ export default function CardCollection() {
       <div className="inner">
         {data.map((el: any) => (
           <MentorCard
+            key={el.mentor.name + el.content}
             content={el.content}
             name={el.mentor.name}
             company={el.mentor.company.name}

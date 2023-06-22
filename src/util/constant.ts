@@ -5,8 +5,8 @@ export const KAKAO_REDIRECT_URI = window.location.origin.includes('localhost')
   : 'http://43.201.17.248:3000/oauth/callback/kakao';
 export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
 
-export const companyClass = ['대기업', '중견기업', '공기업', '스타트업', '외국계', '기타'];
-export const mentoYear = ['주니어 (1~4)', '미들 (5~8)', '시니어 (8~12)', '엑스퍼트 (13~)'];
+export const companyClass = ['사기업', '공기업', '스타트업', '외국계', '기타'];
+// export const mentoYear = ['주니어 (1~4)', '미들 (5~8)', '시니어 (8~12)', '엑스퍼트 (13~)'];
 export const jobClass = [
   {
     class: '경영·기획',
