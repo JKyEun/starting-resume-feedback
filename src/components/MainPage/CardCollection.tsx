@@ -16,6 +16,7 @@ export default function CardCollection() {
       <div className="inner">
         {data.map((el: any) => (
           <MentorCard
+            key={el.mentor.name + el.content}
             content={el.content}
             name={el.mentor.name}
             company={el.mentor.company.name}

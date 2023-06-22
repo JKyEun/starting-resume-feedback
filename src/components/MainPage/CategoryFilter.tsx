@@ -1,15 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import CategoryCheckbox from './CategoryCheckbox';
 
 export default function CategoryFilter({ title, category }: { title: string; category: string[] }) {
   const [isDropdownOpen, setDropdownOpen] = useState<boolean>(false);
+  const dropdown = useRef<HTMLDivElement>(null);
 
   const onDropdownClick = () => {
     setDropdownOpen((cur) => !cur);
   };
 
+  useEffect(() => {
+    const handleOutsideClose = (e: MouseEvent) => {
+      if (isDropdownOpen && !dropdown.current?.contains(e.target as HTMLElement)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener('click', handleOutsideClose);
+
+    return () => document.removeEventListener('click', handleOutsideClose);
+  }, [isDropdownOpen]);
+
   return (
-    <div>
+    <div ref={dropdown}>
       <div onClick={onDropdownClick} className={isDropdownOpen ? 'dropdown-btn clicked' : 'dropdown-btn'}>
         <span>{title}</span>
         {isDropdownOpen ? (
@@ -22,7 +34,7 @@ export default function CategoryFilter({ title, category }: { title: string; cat
         <div className="dropdown">
           <div className="list">
             {category.map((el) => (
-              <div className="check-list">
+              <div key={el} className="check-list">
                 <CategoryCheckbox />
                 <span>{el}</span>
               </div>
