@@ -7,12 +7,10 @@ import Loading from '../Loading';
 import { useAppSelector } from '../../store';
 
 export default function CardCollection() {
-  const { data, isLoading } = useQuery('mentors', getMentors);
   const filter = useAppSelector((state) => state.filter);
-  let filteredData = [];
+  let filteredData: [] = [];
 
-  console.log(data);
-  console.log(filter);
+  const { data, isLoading } = useQuery('mentors', getMentors);
 
   if (isLoading) return <Loading />;
 
