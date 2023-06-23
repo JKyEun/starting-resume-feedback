@@ -6,6 +6,7 @@ export const KAKAO_REDIRECT_URI = window.location.origin.includes('localhost')
 export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
 
 export const companyClass = ['사기업', '공기업', '스타트업', '외국계', '기타'];
+export const orderList = ['최신순', '평점순', '응답순', '연차순', '팔로워순'];
 // export const mentoYear = ['주니어 (1~4)', '미들 (5~8)', '시니어 (8~12)', '엑스퍼트 (13~)'];
 export const jobClass = [
   {

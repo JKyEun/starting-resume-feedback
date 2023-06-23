@@ -52,6 +52,7 @@ const filterSlice = createSlice({
     },
     removeJob: (state) => {
       state.job = [];
+      state.jobFolder = '';
     },
     setCompany: (state, action: PayloadAction<string>) => {
       if (state.companySize.includes(action.payload)) {
