@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { setOrder, useAppDispatch, useAppSelector } from '../../store';
 import { orderList } from '../../util/constant';
+import useOutsideClick from '../../hooks/useOutsideClick';
 
 export default function SortingRule() {
   const dispatch = useAppDispatch();
@@ -17,16 +18,7 @@ export default function SortingRule() {
     setDropdownOpen(false);
   };
 
-  useEffect(() => {
-    const handleOutsideClose = (e: MouseEvent) => {
-      if (isDropdownOpen && !outSideDropdown.current?.contains(e.target as HTMLElement)) {
-        setDropdownOpen(false);
-      }
-    };
-    document.addEventListener('click', handleOutsideClose);
-
-    return () => document.removeEventListener('click', handleOutsideClose);
-  }, [isDropdownOpen]);
+  useOutsideClick(isDropdownOpen, outSideDropdown, setDropdownOpen);
 
   return (
     <div className="sorting-rule" ref={outSideDropdown}>
@@ -41,7 +33,7 @@ export default function SortingRule() {
       {isDropdownOpen && (
         <div className="dropdown sort">
           {orderList.map((el) => (
-            <div onClick={() => onOrderClick(el)} className="list sort">
+            <div key={el} onClick={() => onOrderClick(el)} className="list sort">
               {el}
             </div>
           ))}

@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import CompanyCheckbox from './CompanyCheckbox';
 import { removeCompany, useAppDispatch, useAppSelector } from '../../store';
 import { companyClass } from '../../util/constant';
+import useOutsideClick from '../../hooks/useOutsideClick';
 
 export default function CompanyFilter() {
   const [isDropdownOpen, setDropdownOpen] = useState<boolean>(false);
@@ -18,16 +19,7 @@ export default function CompanyFilter() {
     setDropdownOpen(false);
   };
 
-  useEffect(() => {
-    const handleOutsideClose = (e: MouseEvent) => {
-      if (isDropdownOpen && !outSideDropdown.current?.contains(e.target as HTMLElement)) {
-        setDropdownOpen(false);
-      }
-    };
-    document.addEventListener('click', handleOutsideClose);
-
-    return () => document.removeEventListener('click', handleOutsideClose);
-  }, [isDropdownOpen]);
+  useOutsideClick(isDropdownOpen, outSideDropdown, setDropdownOpen);
 
   return (
     <div ref={outSideDropdown}>
