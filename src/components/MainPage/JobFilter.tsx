@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { jobClass } from '../../util/constant';
 import JobCheckbox from './JobCheckbox';
 import { removeJob, setJobFolder, useAppDispatch, useAppSelector } from '../../store';
+import useOutsideClick from '../../hooks/useOutsideClick';
 
 export default function JobFilter() {
   const dispatch = useAppDispatch();
@@ -24,16 +25,7 @@ export default function JobFilter() {
     dispatch(setJobFolder(el));
   };
 
-  useEffect(() => {
-    const handleOutsideClose = (e: MouseEvent) => {
-      if (isDropdownOpen && !outSideDropdown.current?.contains(e.target as HTMLElement)) {
-        setDropdownOpen(false);
-      }
-    };
-    document.addEventListener('click', handleOutsideClose);
-
-    return () => document.removeEventListener('click', handleOutsideClose);
-  }, [isDropdownOpen]);
+  useOutsideClick(isDropdownOpen, outSideDropdown, setDropdownOpen);
 
   return (
     <div ref={outSideDropdown}>
