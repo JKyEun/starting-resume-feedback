@@ -7,7 +7,7 @@ export default function MainHeader() {
   const isLogin = useAppSelector((state) => state.auth.isLogin);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const [curMenu, setCurMenu] = useState('멘토링');
+  const [curMenu, setCurMenu] = useState<string>('멘토링');
 
   const logoutInHeader = () => {
     localStorage.removeItem('USER_ID');
