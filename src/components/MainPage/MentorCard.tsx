@@ -7,15 +7,17 @@ export default function MentorCard({
   company,
   job,
   year,
+  idx,
 }: {
   content: string;
   nickname: string;
   company: string;
   job: string;
   year: string;
+  idx: number;
 }) {
   return (
-    <div className="mentor-card">
+    <div className={idx % 4 === 3 ? 'mentor-card last' : 'mentor-card'}>
       <div className="intro-wrap">
         <img className="profile-img" src="/images/demoImg.svg" alt="프로필 이미지" />
         <img className="bookmark" src="/images/bookmark.svg" alt="북마크" />

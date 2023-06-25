@@ -6,9 +6,12 @@
     width: 1080px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     .mentor-card {
       margin-bottom: 30px;
+      margin-right: 26px;
+    }
+    .mentor-card.last {
+      margin-right: 0px;
     }
   }
 }
