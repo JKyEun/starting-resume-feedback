@@ -12,6 +12,8 @@ export default function CardCollection() {
 
   const { data, isLoading } = useQuery('mentors', getMentors);
 
+  console.log(data);
+
   if (isLoading) return <Loading />;
 
   if (filter.job.length !== 0) {
@@ -27,13 +29,12 @@ export default function CardCollection() {
       <div className="inner">
         {filteredData.map((el: any) => (
           <MentorCard
-            key={el.mentor.name + el.content}
+            key={el.mentor.name + el.content + el.mentor.nickname}
             content={el.content}
-            name={el.mentor.name}
+            nickname={el.mentor.nickname}
             company={el.mentor.company.name}
             job={el.mentor.subjob.name}
-            year={el.mentor.year}
-            count={el.count}
+            year={el.mentor.year.name}
           />
         ))}
       </div>

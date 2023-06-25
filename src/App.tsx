@@ -6,6 +6,7 @@ import SignInPage from './pages/SignInPage';
 import MainPage from './pages/MainPage';
 import KakaoRedirectHandler from './components/KakaoRedirectHandler';
 import { login, useAppDispatch } from './store';
+import MentorRegistorPage from './pages/MentorRegistorPage';
 
 function App() {
   const location = useLocation();
@@ -20,10 +21,11 @@ function App() {
   return (
     <div className="App">
       {location.pathname !== '/login' && <MainHeader />}
-      {location.pathname !== '/login' && <SubHeader />}
+      {location.pathname !== '/login' && location.pathname !== '/registor' && <SubHeader />}
       <Routes>
         <Route path="/login" element={<SignInPage />} />
         <Route path="/" element={<MainPage />} />
+        <Route path="/registor" element={<MentorRegistorPage />} />
         <Route path="/oauth/callback/kakao" element={<KakaoRedirectHandler />} />
       </Routes>
     </div>
