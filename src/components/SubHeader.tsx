@@ -7,12 +7,13 @@ import useDebounce from '../hooks/useDebounce';
 export default function SubHeader() {
   const [searchText, setSearchText] = useState<string>('');
   const queryClient = useQueryClient();
+  const DEBOUNCING_TIME = 500;
 
   const handleSearch = useDebounce(async (text: string) => {
     const searchResults = await searchMentors(text);
     queryClient.setQueryData('mentors', searchResults);
     if (text === '') queryClient.invalidateQueries('mentors');
-  }, 500);
+  }, DEBOUNCING_TIME);
 
   const onInputChange = async (e: ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
