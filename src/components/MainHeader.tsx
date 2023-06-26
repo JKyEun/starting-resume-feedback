@@ -40,7 +40,7 @@ export default function MainHeader() {
             </span>
             <span
               onClick={() => {
-                navigate('/registor');
+                navigate('/register');
                 setCurMenu('멘토 지원');
               }}
               className={curMenu === '멘토 지원' ? 'menu selected' : 'menu'}>

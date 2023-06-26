@@ -22,6 +22,14 @@
         border-radius: 20px;
         display: flex;
         flex-direction: column;
+        margin-bottom: 40px;
+      }
+      .mentoring-method {
+        background-color: #fff;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 110px;
       }
     }
     .status-box {
@@ -43,6 +51,42 @@
       div.selected {
         background-color: #f4f4f5;
       }
+    }
+  }
+  .save-register {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    bottom: 0;
+    background-color: #fff;
+    width: 100vw;
+    height: 70px;
+    .save {
+      color: #1a7cff;
+      border: 1px solid #1a7cff;
+      width: 96px;
+      height: 46px;
+      padding: 12px 18px;
+      text-align: center;
+      border-radius: 8px;
+      margin-left: 1220px;
+      line-height: 20px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .register {
+      color: #fff;
+      border: none;
+      background-color: #1a7cff;
+      width: 127px;
+      height: 46px;
+      padding: 12px 18px;
+      text-align: center;
+      border-radius: 8px;
+      margin-left: 16px;
+      font-weight: 600;
+      line-height: 20px;
+      cursor: pointer;
     }
   }
 }
