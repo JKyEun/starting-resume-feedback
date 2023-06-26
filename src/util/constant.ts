@@ -207,3 +207,26 @@ export const jobClass = [
     ],
   },
 ];
+
+export const classArr: any = [];
+for (let i = 0; i < jobClass.length; i++) {
+  const data = { value: jobClass[i].class, label: jobClass[i].class };
+  classArr.push(data);
+}
+
+export function getSpecificJob(cla: string): object[] {
+  const data = [];
+  const arr = jobClass.filter((el) => el.class === cla)[0]?.job;
+  for (let i = 0; i < arr.length; i++) {
+    data.push({ value: arr[i], label: arr[i] });
+  }
+
+  return data;
+}
+
+export const mentoYearSelect = [
+  { value: '주니어 (1~4)', label: '주니어 (1~4)' },
+  { value: '미들 (5~8)', label: '미들 (5~8)' },
+  { value: '시니어 (8~12)', label: '시니어 (8~12)' },
+  { value: '엑스퍼트 (13~)', label: '엑스퍼트 (13~)' },
+];

@@ -6,10 +6,10 @@ export default function MentoringMethod() {
       <div className="title">멘토링 정보</div>
       <div className="method">
         <div>
-          한줄 소개 <span>*</span>
+          진행 수단 <span>*</span>
         </div>
         <div>
-          <input type="text" />
+          <textarea></textarea>
         </div>
       </div>
       <div className="time">

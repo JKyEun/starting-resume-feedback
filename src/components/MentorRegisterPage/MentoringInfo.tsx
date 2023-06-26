@@ -17,7 +17,7 @@ export default function MentoringInfo() {
           멘토 소개 <span>*</span>
         </div>
         <div>
-          <input type="text" />
+          <textarea></textarea>
         </div>
       </div>
       <div className="range">
@@ -26,6 +26,14 @@ export default function MentoringInfo() {
         </div>
         <div>
           <input type="text" />
+        </div>
+      </div>
+      <div className="subject">
+        <div>
+          멘토링 주제 <span>*</span>
+        </div>
+        <div>
+          <textarea></textarea>
         </div>
       </div>
       <div className="target">
@@ -41,7 +49,7 @@ export default function MentoringInfo() {
           멘티 준비사항 <span>*</span>
         </div>
         <div>
-          <input type="text" />
+          <textarea></textarea>
         </div>
       </div>
     </div>

@@ -8,14 +8,110 @@
     margin-top: 124px;
     background-color: #f7f8fa;
     .information {
+      position: relative;
       width: 780px;
       margin-right: 30px;
+      .title {
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 36px;
+      }
+      span {
+        color: #317eff;
+      }
+      input[type='text'] {
+        padding: 12px 16px;
+        width: 100%;
+        border-radius: 8px;
+        border: 1px solid #e1e2e4;
+      }
+      input[type='text']:focus {
+        outline: none;
+        border: 1px solid #535353;
+      }
+      div {
+        margin-bottom: 8px;
+      }
+      .frame {
+        margin-bottom: 28px;
+      }
+      textarea {
+        height: 128px;
+        padding: 12px 16px;
+        width: 100%;
+        border-radius: 8px;
+        border: 1px solid #e1e2e4;
+        resize: none;
+      }
+      textarea:focus {
+        outline: none;
+        border: 1px solid #535353;
+      }
+      .badge {
+        padding: 4px 8px;
+        background-color: #fff8ed;
+        color: #ff7f22;
+        border-radius: 8px;
+        margin-left: 5px;
+        font-size: 13px;
+      }
       .basic-info {
         background-color: #fff;
         border-radius: 20px;
         display: flex;
         flex-direction: column;
         margin-bottom: 40px;
+        padding: 36px;
+        .job {
+          margin-bottom: 8px;
+          div:nth-child(2) {
+            display: flex;
+            justify-content: space-between;
+          }
+        }
+        .account {
+          display: flex;
+          justify-content: space-between;
+          div {
+            width: 228px;
+          }
+        }
+        .certificate {
+          div:nth-child(2) {
+            display: flex;
+            height: 46px;
+            .explain {
+              width: 600px;
+              border-radius: 8px;
+              border: 1px solid #e1e2e4;
+              margin-right: 12px;
+              height: 46px;
+            }
+            .filebox label {
+              display: inline-block;
+              padding: 12px 18px;
+              text-align: center;
+              right: 0;
+              width: 96px;
+              height: 46px;
+              color: #317eff;
+              cursor: pointer;
+              border: 1px solid #1a7cff;
+              border-radius: 8px;
+              font-weight: 600;
+            }
+            .filebox input[type='file'] {
+              position: absolute;
+              width: 1px;
+              height: 1px;
+              padding: 0;
+              margin: -1px;
+              overflow: hidden;
+              clip: rect(0, 0, 0, 0);
+              border: 0;
+            }
+          }
+        }
       }
       .mentoring-info {
         background-color: #fff;
@@ -23,6 +119,7 @@
         display: flex;
         flex-direction: column;
         margin-bottom: 40px;
+        padding: 36px;
       }
       .mentoring-method {
         background-color: #fff;
@@ -30,10 +127,13 @@
         display: flex;
         flex-direction: column;
         margin-bottom: 110px;
+        padding: 36px;
       }
     }
     .status-box {
       display: flex;
+      position: sticky;
+      top: 124px;
       flex-direction: column;
       justify-content: center;
       width: 270px;
