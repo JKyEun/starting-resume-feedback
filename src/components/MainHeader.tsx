@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../style/mainHeader.scss';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { logout, useAppDispatch, useAppSelector } from '../store';
 
 export default function MainHeader() {
   const isLogin = useAppSelector((state) => state.auth.isLogin);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const [curMenu, setCurMenu] = useState<string>('멘토링');
+  const [curMenu, setCurMenu] = useState<string>('/');
+  const location = useLocation();
 
   const logoutInHeader = () => {
     localStorage.removeItem('USER_ID');
@@ -16,6 +17,10 @@ export default function MainHeader() {
     dispatch(logout());
     setCurMenu('멘토링');
   };
+
+  useEffect(() => {
+    setCurMenu(location.pathname);
+  });
 
   return (
     <div className="header-area">
@@ -27,7 +32,7 @@ export default function MainHeader() {
         </a>
         {isLogin ? (
           <div className="menu-container">
-            <a href="https://start-ing.kr/" className={curMenu === '내 이력서' ? 'menu selected' : 'menu'}>
+            <a href="https://start-ing.kr/" className="menu">
               내 이력서
             </a>
             <span
@@ -35,7 +40,7 @@ export default function MainHeader() {
                 navigate('/');
                 setCurMenu('멘토링');
               }}
-              className={curMenu === '멘토링' ? 'menu selected' : 'menu'}>
+              className={curMenu === '/' ? 'menu selected' : 'menu'}>
               멘토링
             </span>
             <span
@@ -43,7 +48,7 @@ export default function MainHeader() {
                 navigate('/register');
                 setCurMenu('멘토 지원');
               }}
-              className={curMenu === '멘토 지원' ? 'menu selected' : 'menu'}>
+              className={curMenu === '/register' ? 'menu selected' : 'menu'}>
               멘토 지원
             </span>
             <span onClick={logoutInHeader} className="menu">
