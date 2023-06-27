@@ -8,6 +8,7 @@ import KakaoRedirectHandler from './components/KakaoRedirectHandler';
 import { login, useAppDispatch } from './store';
 import MentorregisterPage from './pages/MentorRegisterPage';
 import MentorDetailPage from './pages/MentorDetailPage';
+import MentoringApplyPage from './pages/MentoringApplyPage';
 
 function App() {
   const location = useLocation();
@@ -27,6 +28,7 @@ function App() {
         <Route path="/login" element={<SignInPage />} />
         <Route path="/" element={<MainPage />} />
         <Route path="/1" element={<MentorDetailPage />} />
+        <Route path="/1/apply" element={<MentoringApplyPage />} />
         <Route path="/register" element={<MentorregisterPage />} />
         <Route path="/oauth/callback/kakao" element={<KakaoRedirectHandler />} />
       </Routes>
