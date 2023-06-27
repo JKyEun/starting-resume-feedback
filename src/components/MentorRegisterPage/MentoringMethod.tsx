@@ -32,55 +32,41 @@ export default function MentoringMethod() {
         <div>
           멘토링 가능 시간 <span>*</span>
         </div>
-        <div>
+        <div className="time-picker">
           <div>
-            <span>월</span>
-            <input type="time" />
-            <span>부터</span>
-            <input type="time" />
-            <span>까지</span>
+            <span className="day">월</span>
+            <input className="time" type="time" />
+            <span className="add">추가</span>
           </div>
           <div>
-            <span>화</span>
-            <input type="time" />
-            <span>부터</span>
-            <input type="time" />
-            <span>까지</span>
+            <span className="day">월</span>
+            <input className="time" type="time" />
+            <span className="add">추가</span>
           </div>
           <div>
-            <span>수</span>
-            <input type="time" />
-            <span>부터</span>
-            <input type="time" />
-            <span>까지</span>
+            <span className="day">월</span>
+            <input className="time" type="time" />
+            <span className="add">추가</span>
           </div>
           <div>
-            <span>목</span>
-            <input type="time" />
-            <span>부터</span>
-            <input type="time" />
-            <span>까지</span>
+            <span className="day">월</span>
+            <input className="time" type="time" />
+            <span className="add">추가</span>
           </div>
           <div>
-            <span>금</span>
-            <input type="time" />
-            <span>부터</span>
-            <input type="time" />
-            <span>까지</span>
+            <span className="day">월</span>
+            <input className="time" type="time" />
+            <span className="add">추가</span>
           </div>
           <div>
-            <span>토</span>
-            <input type="time" />
-            <span>부터</span>
-            <input type="time" />
-            <span>까지</span>
+            <span className="day">월</span>
+            <input className="time" type="time" />
+            <span className="add">추가</span>
           </div>
           <div>
-            <span>일</span>
-            <input type="time" />
-            <span>부터</span>
-            <input type="time" />
-            <span>까지</span>
+            <span className="day">월</span>
+            <input className="time" type="time" />
+            <span className="add">추가</span>
           </div>
         </div>
       </div>
