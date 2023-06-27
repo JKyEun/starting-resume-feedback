@@ -40,7 +40,7 @@ export default function MainHeader() {
                 navigate('/');
                 setCurMenu('멘토링');
               }}
-              className={curMenu === '/' ? 'menu selected' : 'menu'}>
+              className={curMenu !== '/register' ? 'menu selected' : 'menu'}>
               멘토링
             </span>
             <span
