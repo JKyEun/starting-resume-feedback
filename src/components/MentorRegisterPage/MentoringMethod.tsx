@@ -3,7 +3,7 @@ import React from 'react';
 export default function MentoringMethod() {
   return (
     <div className="mentoring-method">
-      <div className="title">멘토링 정보</div>
+      <div className="title">멘토링 방식</div>
       <div className="method">
         <div>
           진행 수단 <span>*</span>
