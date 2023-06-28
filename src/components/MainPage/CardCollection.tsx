@@ -10,11 +10,11 @@ export default function CardCollection() {
   const filter = useAppSelector((state) => state.filter);
   let filteredData: [] = [];
 
-  const { data, isLoading } = useQuery('mentors', getMentors);
+  const { data, isLoading, isError } = useQuery('mentors', getMentors);
 
   console.log(data);
 
-  if (isLoading) return <Loading />;
+  if (isLoading || isError) return <Loading />;
 
   if (filter.job.length !== 0) {
     filteredData = data.filter((el: any) => filter.job.includes(el.mentor.subjob.name));
@@ -27,7 +27,7 @@ export default function CardCollection() {
   return (
     <div className="card-collection">
       <div className="inner">
-        {filteredData.map((el: any, idx: number) => (
+        {/* {filteredData.map((el: any, idx: number) => (
           <MentorCard
             key={el.mentor.name + el.content + el.mentor.nickname}
             content={el.content}
@@ -37,7 +37,7 @@ export default function CardCollection() {
             year={el.mentor.year.name}
             idx={idx}
           />
-        ))}
+        ))} */}
       </div>
     </div>
   );

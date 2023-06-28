@@ -38,7 +38,7 @@ export default function KakaoRedirectHandler() {
           const userKaKaoInfo = await userResponese.json();
 
           const userLoginInfo: LoginInfo = {
-            name: userKaKaoInfo.kakao_account.profile.nickname,
+            email: userKaKaoInfo.kakao_account.email,
             uuid: userKaKaoInfo.id,
           };
 

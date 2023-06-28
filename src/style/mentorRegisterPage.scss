@@ -135,6 +135,7 @@
           flex-direction: column;
           div {
             display: flex;
+            flex-wrap: wrap;
           }
           .day {
             width: 60px;
@@ -142,12 +143,16 @@
             padding: 12px;
             border: 1px solid #e1e2e4;
             border-radius: 8px;
+            margin: 0 8px 8px 0;
           }
           .time {
             width: 122px;
             height: 46px;
             border: 1px solid #e1e2e4;
             border-radius: 8px;
+            margin-right: 8px;
+            padding: 8px;
+            margin: 0 8px 8px 0;
           }
           .add {
             width: 60px;
@@ -155,6 +160,9 @@
             padding: 12px;
             border: 1px solid #e1e2e4;
             border-radius: 8px;
+            color: #000;
+            text-align: center;
+            cursor: pointer;
           }
         }
       }
