@@ -106,6 +106,73 @@
         width: 154px;
         margin: 0 auto;
       }
+      .modal-background {
+        position: fixed;
+        height: 100vh;
+        z-index: 5;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.8);
+      }
+      .pay-modal {
+        display: flex;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 536px;
+        padding: 36px;
+        z-index: 7;
+        background-color: #fff;
+        border-radius: 20px;
+        flex-direction: column;
+        align-items: center;
+        div {
+          margin-bottom: 32px;
+          text-align: center;
+        }
+        .modal-title {
+          margin-top: 10px;
+          font-size: 32px;
+          font-weight: 600;
+        }
+        .explain1 {
+          font-weight: 600;
+          line-height: 22px;
+        }
+        .explain2 {
+          font-weight: 600;
+          line-height: 22px;
+          color: #a5a5a5;
+        }
+        .QR {
+          width: 200px;
+          height: 200px;
+          border: 1px solid black;
+        }
+        .price {
+          font-size: 24px;
+          font-weight: 700;
+        }
+        .btns {
+          display: flex;
+          justify-content: center;
+          margin-bottom: 0;
+          .close {
+            @include btn2;
+            width: 226px;
+            margin-bottom: 0;
+          }
+          .complete {
+            @include btn1;
+            width: 226px;
+            margin-left: 12px;
+            margin-bottom: 0;
+          }
+        }
+      }
     }
   }
 }
