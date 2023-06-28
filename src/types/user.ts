@@ -1,4 +1,4 @@
 export type LoginInfo = {
-  name: string;
+  email: string;
   uuid: number;
 };

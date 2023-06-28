@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Select from 'react-select';
 import { classArr, getSpecificJob, mentoYearSelect } from '../../util/constant';
 
@@ -6,6 +6,11 @@ export default function BasicInfo() {
   const [jobFolder, setJobFolder] = useState<any>('직군을 선택하세요');
   const [isDisabled, setDisabled] = useState<boolean>(true);
   const [specificJob, setSpecificJob] = useState<any>(null);
+  const fileInput = useRef<HTMLInputElement>(null);
+  const [fileName, setFileName] = useState<string>('');
+
+  console.log(fileInput);
+
   const style = {
     control: (baseStyles: any) => ({
       ...baseStyles,
@@ -127,13 +132,21 @@ export default function BasicInfo() {
       </div>
       <div className="certificate frame">
         <div>
-          증빙자료 <span>*</span> <span className="badge">첨부 가능 자료: 국민연금 가입증명서, 재직/경력증명서</span>
+          증빙자료 <span>*</span>
+          <span className="badge">첨부 가능 자료: 명함, 국민연금 가입증명서, 재직/경력증명서</span>
         </div>
         <div>
-          <div className="explain"></div>
+          <div className="explain">{fileName === '' ? '파일을 추가해주세요' : fileName}</div>
           <div className="filebox">
             <label htmlFor="certificate">파일추가</label>
-            <input type="file" id="certificate" />
+            <input
+              onChange={(e) => {
+                setFileName(e.target.value);
+              }}
+              ref={fileInput}
+              type="file"
+              id="certificate"
+            />
           </div>
         </div>
       </div>
