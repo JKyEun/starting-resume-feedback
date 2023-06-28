@@ -20,7 +20,7 @@
         font-size: 22px;
         font-weight: 600;
         padding-bottom: 20px;
-        margin-bottom: 20px;
+        margin-bottom: 40px;
         border-bottom: 1px solid #e1e2e4;
       }
       .sub-title {
@@ -31,21 +31,98 @@
       div {
         margin-bottom: 60px;
       }
+      .mentoring-review {
+        div {
+          margin: 0;
+        }
+        .review-header {
+          display: flex;
+          justify-content: space-between;
+          margin: 20px 0 16px 0;
+          line-height: 24px;
+          .left-side {
+            display: flex;
+            img {
+              margin-right: 10px;
+              margin-bottom: 2px;
+            }
+            div {
+              padding: 0 8px 0 8px;
+              margin: 0 8px 0 8px;
+            }
+            div:first-child {
+              font-size: 24px;
+              font-weight: 600;
+              padding-left: 0;
+              margin-left: 0;
+            }
+          }
+          .right-side {
+            display: flex;
+            div {
+              padding: 0 8px 0 8px;
+              margin: 0 8px 0 8px;
+              color: #a5a5a5;
+            }
+            div:last-child {
+              padding-right: 0;
+              margin-right: 0;
+            }
+            div.selected {
+              color: black;
+            }
+          }
+        }
+        .each-review {
+          padding: 32px 0;
+          border-top: 1px solid #e1e2e4;
+          .name {
+            font-size: 14px;
+            margin-bottom: 12px;
+          }
+          .star {
+            font-size: 14px;
+            margin-bottom: 12px;
+            span {
+              img {
+                width: 16px;
+                padding: 2px 2px 0 2px;
+              }
+            }
+            .score {
+              margin-left: 3px;
+            }
+          }
+          .content {
+            margin-bottom: 16px;
+          }
+          .review-badge {
+            padding: 4px 8px;
+            border: 1px solid;
+            border-radius: 8px;
+          }
+          .date {
+            color: #a5a5a5;
+            margin-top: 20px;
+            font-size: 14px;
+          }
+        }
+      }
     }
     .detail-card {
       display: flex;
-      position: relative;
       flex-direction: column;
       align-items: center;
-      justify-content: space-evenly;
+      position: relative;
       width: 352px;
       height: 511px;
       border-radius: 20px;
       background-color: #fff;
-      img {
+      .profile-img {
         border-radius: 50%;
         width: 120px;
         height: 120px;
+        margin-top: 36px;
       }
       .badge {
         position: absolute;
@@ -60,8 +137,9 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin-top: 20px;
         div {
-          margin-bottom: 10px;
+          margin-bottom: 12px;
         }
       }
       .nickname {
@@ -70,22 +148,40 @@
       }
       .num {
         display: flex;
+        text-align: center;
+        width: 260px;
+        justify-content: space-between;
+        margin-top: 30px;
         div {
           div:nth-child(2) {
             font-size: 22px;
             font-weight: 600;
+            margin-top: 7px;
           }
         }
       }
       .btns {
         display: flex;
+        margin-top: 30px;
         .follow {
           width: 110px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
           @include btn2;
+          text-align: center;
+          .img {
+            margin-right: 5px;
+            img {
+              padding-top: 4px;
+              width: 13px;
+            }
+          }
         }
         .apply {
           width: 158px;
           @include btn1;
+          margin-left: 12px;
         }
       }
     }
