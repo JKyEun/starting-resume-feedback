@@ -14,7 +14,7 @@
   "plugins": ["import", "html"],
   "extends": ["airbnb", "airbnb-typescript", "prettier", "react-app"],
   "rules": {
-    "no-console": "off",
+    "no-console": "warn",
     "no-alert": "off",
     "no-plusplus": "off",
     "no-shadow": "off",

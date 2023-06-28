@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Select from 'react-select';
+import axios from 'axios';
 import { classArr, getSpecificJob, mentoYearSelect } from '../../util/constant';
 
 export default function BasicInfo() {
@@ -10,6 +11,56 @@ export default function BasicInfo() {
   const [fileName, setFileName] = useState<string>('');
 
   console.log(fileInput);
+
+  const sendFile = async () => {
+    const formData = new FormData();
+    const files = fileInput.current?.files as FileList;
+    if (files.length > 0) {
+      formData.append('file', files[0]);
+    }
+    const res = await axios.post(
+      'http://43.201.17.248:8080/mentor/resume',
+      { resume: formData },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('JWT_TOKEN')}`,
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    );
+
+    console.log(res.data);
+    // const res = await fetch(`http://43.201.17.248:8080/mentor/resume`, {
+    //   method: 'POST',
+    //   headers: {
+    //     Authorization: `Bearer ${localStorage.getItem('JWT_TOKEN')}`,
+    //     'Content-type': 'multipart/form-data',
+    //   },
+    //   body: JSON.stringify({ resume: formData }),
+    // });
+    // const data = await res.json();
+
+    // console.log(data);
+  };
+
+  const sendImg = async () => {
+    const formData = new FormData();
+    const files = fileInput.current?.files as FileList;
+    if (files.length > 0) {
+      formData.append('file', files[0]);
+    }
+    const res = await axios.post(
+      'http://43.201.17.248:8080/mentor/profile-image',
+      { image: formData },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('JWT_TOKEN')}`,
+        },
+      }
+    );
+
+    console.log(res.data);
+  };
 
   const style = {
     control: (baseStyles: any) => ({
@@ -142,6 +193,7 @@ export default function BasicInfo() {
             <input
               onChange={(e) => {
                 setFileName(e.target.value);
+                sendFile();
               }}
               ref={fileInput}
               type="file"

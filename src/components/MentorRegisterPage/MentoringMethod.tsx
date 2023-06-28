@@ -57,13 +57,14 @@ export default function MentoringMethod() {
         </div>
         <div className="time-picker">
           {timeArr.map((timeEl: any) => (
-            <div>
+            <div key={timeEl[0]}>
               <span className="day">
                 <img src="/images/check.svg" alt="체크" /> <span>{timeEl[0]}</span>
               </span>
               <span>
                 {timeEl[1].map((el: string, idx: number) => (
                   <input
+                    key={el + idx.toString()}
                     onChange={(e) => {
                       setTime(timeEl[1], timeEl[2], idx, e.target.value);
                     }}
