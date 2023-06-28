@@ -1,0 +1,111 @@
+@import 'common';
+
+.page {
+  .apply-inner {
+    margin: 68px 0;
+    .apply-page {
+      background-color: #fff;
+      border-radius: 20px;
+      padding: 36px;
+      display: flex;
+      flex-direction: column;
+      width: 1080px;
+      div {
+        margin-bottom: 28px;
+      }
+      span {
+        color: #317eff;
+      }
+      input[type='text'] {
+        @include common_input;
+      }
+      textarea {
+        resize: none;
+        @include common_input;
+        height: 102px;
+      }
+      .apply-title {
+        font-size: 32px;
+        font-weight: 700;
+      }
+      .available {
+        .time-picker {
+          span {
+            color: black;
+            text-align: center;
+            border: 1px solid #e1e2e4;
+            border-radius: 8px;
+            padding: 12px;
+            height: 46px;
+            margin-right: 4px;
+          }
+          .day {
+            margin-right: 8px;
+          }
+          div {
+            margin: 0 0 30px 0;
+          }
+          div:last-child {
+            margin: 0;
+          }
+          display: flex;
+          flex-direction: column;
+        }
+      }
+      .phone {
+        div {
+          margin-bottom: 7px;
+        }
+      }
+      .email {
+        div {
+          margin-bottom: 7px;
+        }
+      }
+      .url {
+        div {
+          margin-bottom: 7px;
+        }
+        .add {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 147px;
+          border: 1px solid #535353;
+          border-radius: 8px;
+          text-align: center;
+          padding: 8px 16px 8px 10px;
+          height: 46px;
+          img {
+            margin-right: 4px;
+          }
+          span {
+            color: black;
+          }
+        }
+        .more-link {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          input {
+            width: 480px;
+          }
+          div {
+            margin: 0;
+            margin-right: 3px;
+          }
+        }
+      }
+      .content {
+        div {
+          margin-bottom: 7px;
+        }
+      }
+      .pay {
+        @include btn1;
+        width: 154px;
+        margin: 0 auto;
+      }
+    }
+  }
+}
