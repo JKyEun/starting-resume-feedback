@@ -3,7 +3,7 @@ import React from 'react';
 export default function DetailCard() {
   return (
     <div className="detail-card">
-      <img src="/images/demoImg.svg" alt="프로필 이미지" />
+      <img className="profile-img" src="/images/demoImg.svg" alt="프로필 이미지" />
       <span className="badge">신규</span>
       <div className="info">
         <div className="nickname">닉네임</div>
@@ -26,7 +26,12 @@ export default function DetailCard() {
         </div>
       </div>
       <div className="btns">
-        <div className="follow">000</div>
+        <div className="follow">
+          <span className="img">
+            <img src="/images/bookmark-detail.svg" alt="북마크" />
+          </span>
+          <span>000</span>
+        </div>
         <div className="apply">멘토링 신청하기</div>
       </div>
     </div>
