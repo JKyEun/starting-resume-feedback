@@ -27,7 +27,7 @@ export default function CardCollection() {
   return (
     <div className="card-collection">
       <div className="inner">
-        {filteredData.map((el: any, idx: number) => (
+        {/* {filteredData.map((el: any, idx: number) => (
           <MentorCard
             key={el.mentor.name + el.content + el.mentor.nickname}
             content={el.title}
@@ -37,7 +37,7 @@ export default function CardCollection() {
             year={el.mentor.year?.name}
             idx={idx}
           />
-        ))}
+        ))} */}
       </div>
     </div>
   );

@@ -1,11 +1,34 @@
 import React from 'react';
 import '../../style/mainBanner.scss';
+import { useNavigate } from 'react-router';
 
 export default function MainBanner() {
-  const randomNumber = Math.floor(Math.random() * 2);
+  const randomNumber = Math.floor(Math.random() * 3);
+  const navigate = useNavigate();
+  console.log(randomNumber);
+  const imgArr = ['/images/banner0.svg', '/images/banner1.svg', '/images/banner2.svg'];
+
+  const onBannerClick = () => {
+    if (randomNumber === 0) {
+      navigate('/register');
+    } else if (randomNumber === 2) {
+      if (localStorage.getItem('USER_ID')) {
+        navigate('/login');
+      } else {
+        window.location.reload();
+      }
+    }
+  };
+
   return (
-    <div className="main-banner">
-      <img src={`/images/banner${randomNumber}.svg`} alt="메인 배너" />
+    <div onClick={onBannerClick} className="main-banner">
+      {randomNumber === 1 ? (
+        <a target="_blank" href="https://momit.notion.site/bf42b2b46d214799a25a9c7581139f5b?pvs=4">
+          <img src={imgArr[randomNumber]} alt="메인 배너" />
+        </a>
+      ) : (
+        <img src={imgArr[randomNumber]} alt="메인 배너" />
+      )}
     </div>
   );
 }
