@@ -7,7 +7,6 @@ export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id
 
 export const companyClass = ['사기업', '공기업', '스타트업', '외국계', '기타'];
 export const orderList = ['최신순', '평점순', '응답순', '연차순', '팔로워순'];
-// export const mentoYear = ['주니어 (1~4)', '미들 (5~8)', '시니어 (8~12)', '엑스퍼트 (13~)'];
 export const jobClass = [
   {
     class: '경영·기획',
@@ -230,3 +229,41 @@ export const mentoYearSelect = [
   { value: '시니어 (8~12)', label: '시니어 (8~12)' },
   { value: '엑스퍼트 (13~)', label: '엑스퍼트 (13~)' },
 ];
+
+export const companyTypeList = [
+  { value: '사기업', label: '사기업' },
+  { value: '공기업', label: '공기업' },
+  { value: '스타트업', label: '스타트업' },
+  { value: '외국계', label: '외국계' },
+  { value: '기타', label: '기타' },
+];
+
+export const style = {
+  control: (baseStyles: any) => ({
+    ...baseStyles,
+    borderColor: '#e1e2e4',
+    outline: 'none',
+    width: '348px',
+    height: '48px',
+    padding: '3px 0px 0px 5px',
+  }),
+  option: (styles: any, { isSelected }: { isSelected: boolean }) => ({
+    ...styles,
+    color: isSelected ? 'black' : 'black',
+  }),
+};
+
+export const style2 = {
+  control: (baseStyles: any) => ({
+    ...baseStyles,
+    borderColor: '#e1e2e4',
+    outline: 'none',
+    width: '100%',
+    height: '48px',
+    padding: '3px 0px 0px 5px',
+  }),
+  option: (styles: any, { isSelected }: { isSelected: boolean }) => ({
+    ...styles,
+    color: isSelected ? 'black' : 'black',
+  }),
+};

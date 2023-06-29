@@ -24,7 +24,7 @@ export default function MentoringMethod() {
   const dispatch = useAppDispatch();
 
   const setTime = (dayTime: any, setDayTime: any, idx: any, time: any) => {
-    const arr = dayTime;
+    const arr = [...dayTime];
     arr[idx] = time;
     setDayTime(arr);
   };
@@ -93,6 +93,7 @@ export default function MentoringMethod() {
                       setTime(timeEl[1], timeEl[2], idx, e.target.value);
                       sendInfo();
                     }}
+                    value={timeEl[1]}
                     className="time"
                     type="time"
                   />

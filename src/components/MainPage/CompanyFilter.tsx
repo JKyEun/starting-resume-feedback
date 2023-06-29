@@ -7,7 +7,7 @@ import useOutsideClick from '../../hooks/useOutsideClick';
 export default function CompanyFilter() {
   const [isDropdownOpen, setDropdownOpen] = useState<boolean>(false);
   const outSideDropdown = useRef<HTMLDivElement>(null);
-  const companySize = useAppSelector((state) => state.filter.companySize);
+  const companyType = useAppSelector((state) => state.filter.companyType);
   const dispatch = useAppDispatch();
 
   const onDropdownClick = () => {
@@ -24,13 +24,13 @@ export default function CompanyFilter() {
   return (
     <div ref={outSideDropdown}>
       <div onClick={onDropdownClick} className={isDropdownOpen ? 'dropdown-btn clicked' : 'dropdown-btn'}>
-        {companySize.length === 0 ? (
+        {companyType.length === 0 ? (
           <span>기업 종류 선택</span>
-        ) : companySize.length === 1 ? (
-          <span className="selected-title">{companySize[0]}</span>
+        ) : companyType.length === 1 ? (
+          <span className="selected-title">{companyType[0]}</span>
         ) : (
           <span className="selected-title">
-            {companySize[0]} 외 {companySize.length}
+            {companyType[0]} 외 {companyType.length}
           </span>
         )}
         {isDropdownOpen ? (

@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../style/mentorCard.scss';
+import { useNavigate } from 'react-router';
 
 export default function MentorCard({
   content,
@@ -16,8 +17,11 @@ export default function MentorCard({
   year: string;
   idx: number;
 }) {
+  const navigate = useNavigate();
+  const onCardClick = () => {};
+
   return (
-    <div className={idx % 4 === 3 ? 'mentor-card last' : 'mentor-card'}>
+    <div onClick={onCardClick} className={idx % 4 === 3 ? 'mentor-card last' : 'mentor-card'}>
       <div className="intro-wrap">
         <img className="profile-img" src="/images/demoImg.svg" alt="프로필 이미지" />
         <img className="bookmark" src="/images/bookmark.svg" alt="북마크" />

@@ -18,8 +18,8 @@ export default function CardCollection() {
 
   if (filter.job.length !== 0) {
     filteredData = data.filter((el: any) => filter.job.includes(el.mentor.subjob.name));
-  } else if (filter.companySize.length !== 0) {
-    filteredData = data.filter((el: any) => filter.companySize.includes(el.mentor.company.companySize.name));
+  } else if (filter.companyType.length !== 0) {
+    filteredData = data.filter((el: any) => filter.companyType.includes(el.mentor.company.companyType.name));
   } else {
     filteredData = data;
   }
@@ -27,17 +27,17 @@ export default function CardCollection() {
   return (
     <div className="card-collection">
       <div className="inner">
-        {/* {filteredData.map((el: any, idx: number) => (
+        {filteredData.map((el: any, idx: number) => (
           <MentorCard
             key={el.mentor.name + el.content + el.mentor.nickname}
-            content={el.content}
+            content={el.title}
             nickname={el.mentor.nickname}
-            company={el.mentor.company.name}
-            job={el.mentor.subjob.name}
-            year={el.mentor.year.name}
+            company={el.mentor.company?.name}
+            job={el.mentor.subjob?.name}
+            year={el.mentor.year?.name}
             idx={idx}
           />
-        ))} */}
+        ))}
       </div>
     </div>
   );

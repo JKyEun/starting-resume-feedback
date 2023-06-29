@@ -3,7 +3,7 @@ import { setCompany, useAppDispatch, useAppSelector } from '../../store';
 
 export default function CompanyCheckbox({ el }: { el: string }) {
   const [isChecked, setChecked] = useState<boolean>(false);
-  const companySize = useAppSelector((state) => state.filter.companySize);
+  const companyType = useAppSelector((state) => state.filter.companyType);
   const dispatch = useAppDispatch();
 
   const onCheckboxClick = () => {
@@ -12,12 +12,12 @@ export default function CompanyCheckbox({ el }: { el: string }) {
   };
 
   useEffect(() => {
-    if (companySize.includes(el)) {
+    if (companyType.includes(el)) {
       setChecked(true);
     } else {
       setChecked(false);
     }
-  }, [companySize, el]);
+  }, [companyType, el]);
 
   return <div onClick={onCheckboxClick} className={isChecked ? 'checkbox checked' : 'checkbox'}></div>;
 }
