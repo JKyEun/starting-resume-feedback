@@ -6,6 +6,7 @@
   height: 359px;
   border: 2px solid #e1e2e4;
   border-radius: 15px;
+  cursor: pointer;
   padding: 25px 20px;
   .intro-wrap {
     display: flex;
@@ -13,14 +14,16 @@
     align-items: flex-start;
     .profile-img {
       border-radius: 50%;
+      width: 68px;
+      height: 68px;
     }
   }
   .mentor-name {
-    font-size: 15px;
-  }
-  .mentor-company {
     font-size: 18px;
     font-weight: 700;
+  }
+  .mentor-company {
+    font-size: 16px;
   }
   .job-wrap {
     font-size: 14px;

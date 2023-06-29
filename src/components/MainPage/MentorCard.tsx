@@ -8,22 +8,35 @@ export default function MentorCard({
   company,
   job,
   year,
+  count,
+  profileImg,
   idx,
+  uuid,
 }: {
   content: string;
   nickname: string;
   company: string;
   job: string;
   year: string;
+  count: number;
+  profileImg: string;
   idx: number;
+  uuid: number;
 }) {
   const navigate = useNavigate();
-  const onCardClick = () => {};
+
+  const onCardClick = () => {
+    navigate(`/${uuid}`);
+  };
 
   return (
     <div onClick={onCardClick} className={idx % 4 === 3 ? 'mentor-card last' : 'mentor-card'}>
       <div className="intro-wrap">
-        <img className="profile-img" src="/images/demoImg.svg" alt="프로필 이미지" />
+        <img
+          className="profile-img"
+          src={profileImg === null ? '/images/basic-img.svg' : profileImg}
+          alt="프로필 이미지"
+        />
         <img className="bookmark" src="/images/bookmark.svg" alt="북마크" />
       </div>
       <span className="mentor-name">{nickname}</span>
@@ -37,7 +50,7 @@ export default function MentorCard({
       <div className="review-wrap">
         <img src="/images/star.svg" alt="별점" />
         <span>5.0 (99+)</span>
-        <span>멘토링 0회</span>
+        <span>멘토링 {count}회</span>
       </div>
     </div>
   );

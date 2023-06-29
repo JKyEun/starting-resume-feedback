@@ -27,17 +27,20 @@ export default function CardCollection() {
   return (
     <div className="card-collection">
       <div className="inner">
-        {/* {filteredData.map((el: any, idx: number) => (
+        {filteredData.map((el: any, idx: number) => (
           <MentorCard
             key={el.mentor.name + el.content + el.mentor.nickname}
             content={el.title}
             nickname={el.mentor.nickname}
             company={el.mentor.company?.name}
+            profileImg={el.profile}
             job={el.mentor.subjob?.name}
             year={el.mentor.year?.name}
+            count={el.count}
+            uuid={el.mentor.uuid}
             idx={idx}
           />
-        ))} */}
+        ))}
       </div>
     </div>
   );
