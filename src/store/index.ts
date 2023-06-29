@@ -25,14 +25,14 @@ const authSlice = createSlice({
 type FilterState = {
   jobFolder: string;
   job: string[];
-  companySize: string[];
+  companyType: string[];
   order: string;
 };
 
 const initialFilterState: FilterState = {
   jobFolder: '',
   job: [],
-  companySize: [],
+  companyType: [],
   order: '최신순',
 };
 
@@ -55,14 +55,14 @@ const filterSlice = createSlice({
       state.jobFolder = '';
     },
     setCompany: (state, action: PayloadAction<string>) => {
-      if (state.companySize.includes(action.payload)) {
-        state.companySize = state.companySize.filter((el) => el !== action.payload);
+      if (state.companyType.includes(action.payload)) {
+        state.companyType = state.companyType.filter((el) => el !== action.payload);
       } else {
-        state.companySize = [...state.companySize, action.payload];
+        state.companyType = [...state.companyType, action.payload];
       }
     },
     removeCompany: (state) => {
-      state.companySize = [];
+      state.companyType = [];
     },
     setOrder: (state, action: PayloadAction<string>) => {
       state.order = action.payload;
@@ -74,6 +74,7 @@ type MentorRegistorState = {
   name: string;
   nickname: string;
   company: string;
+  companyType: string;
   job: string;
   subjob: string;
   year: string;
@@ -97,6 +98,7 @@ const initialMentorRegistorState: MentorRegistorState = {
   name: '',
   nickname: '',
   company: '',
+  companyType: '',
   job: '',
   subjob: '',
   year: '',

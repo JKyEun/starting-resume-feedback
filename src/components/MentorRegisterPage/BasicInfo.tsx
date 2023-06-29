@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import Select from 'react-select';
 import axios from 'axios';
-import { classArr, getSpecificJob, mentoYearSelect } from '../../util/constant';
+import { classArr, companyTypeList, getSpecificJob, mentoYearSelect, style, style2 } from '../../util/constant';
 import { setMentorRegister, useAppDispatch } from '../../store';
 
 export default function BasicInfo() {
@@ -14,12 +14,14 @@ export default function BasicInfo() {
   const name = useRef<HTMLInputElement>(null);
   const nickname = useRef<HTMLInputElement>(null);
   const company = useRef<HTMLInputElement>(null);
+  const companyType = useRef<any>(null);
   const jobSpecific = useRef<any>(null);
   const year = useRef<any>(null);
   const bankName = useRef<HTMLInputElement>(null);
   const account = useRef<HTMLInputElement>(null);
   const accountName = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
+  const [imgUrl, setImgUrl] = useState<string>('');
 
   const sendFile = async () => {
     const formData = new FormData();
@@ -40,7 +42,7 @@ export default function BasicInfo() {
 
   const sendImg = async () => {
     const formData = new FormData();
-    const files = fileInput.current?.files as FileList;
+    const files = imgInput.current?.files as FileList;
     if (files.length > 0) {
       formData.append('image', files[0]);
     }
@@ -52,6 +54,8 @@ export default function BasicInfo() {
       withCredentials: true,
     });
 
+    setImgUrl(res.data.url);
+
     console.log(res.data);
   };
 
@@ -60,6 +64,7 @@ export default function BasicInfo() {
       name: name.current?.value,
       nickname: nickname.current?.value,
       company: company.current?.value,
+      companyType: companyType.current?.props?.value?.label,
       job: jobFolder,
       subjob: jobSpecific.current?.props?.value?.label,
       year: year.current?.props?.value?.label,
@@ -71,21 +76,6 @@ export default function BasicInfo() {
     dispatch(setMentorRegister(basicInfo));
   };
 
-  const style = {
-    control: (baseStyles: any) => ({
-      ...baseStyles,
-      borderColor: '#e1e2e4',
-      outline: 'none',
-      width: '348px',
-      height: '48px',
-      padding: '3px 0px 0px 5px',
-    }),
-    option: (styles: any, { isSelected }: { isSelected: boolean }) => ({
-      ...styles,
-      color: isSelected ? 'black' : 'black',
-    }),
-  };
-
   return (
     <div className="basic-info">
       <div className="title">기본 정보</div>
@@ -95,7 +85,13 @@ export default function BasicInfo() {
         </div>
         <div className="img-wrap">
           <div className="black"></div>
-          <img className="profile" src="/images/basic-img.svg" alt="프로필 이미지" />
+          <img
+            className="profile"
+            src={
+              imgInput.current?.files?.length === 0 || imgInput.current === null ? '/images/basic-img.svg' : `${imgUrl}`
+            }
+            alt="프로필 이미지"
+          />
           <label className="input-btn" htmlFor="img-input">
             <img src="/images/edit.svg" alt="연필" />
           </label>
@@ -124,6 +120,27 @@ export default function BasicInfo() {
         </div>
         <div>
           <input onChange={sendInfo} ref={company} type="text" />
+        </div>
+      </div>
+      <div className="company frame">
+        <div>
+          기업 종류 <span>*</span>
+        </div>
+        <div>
+          <Select
+            onChange={sendInfo}
+            ref={companyType}
+            placeholder="기업 종류를 선택해주세요"
+            styles={style2}
+            theme={(theme) => ({
+              ...theme,
+              borderRadius: 8,
+              colors: { ...theme.colors, primary25: '#f4f4f5', primary: '#f4f4f5', primary50: '#f4f4f5' },
+            })}
+            className="company-type"
+            options={companyTypeList}
+            isSearchable={false}
+          />
         </div>
       </div>
       <div className="job frame">
@@ -175,20 +192,7 @@ export default function BasicInfo() {
             onChange={sendInfo}
             ref={year}
             placeholder="경력기간을 선택하세요"
-            styles={{
-              control: (baseStyles: any) => ({
-                ...baseStyles,
-                borderColor: '#e1e2e4',
-                outline: 'none',
-                width: '100%',
-                height: '48px',
-                padding: '3px 0px 0px 5px',
-              }),
-              option: (styles: any, { isSelected }: { isSelected: boolean }) => ({
-                ...styles,
-                color: isSelected ? 'black' : 'black',
-              }),
-            }}
+            styles={style2}
             theme={(theme) => ({
               ...theme,
               borderRadius: 8,

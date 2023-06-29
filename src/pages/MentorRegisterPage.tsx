@@ -35,25 +35,24 @@ export default function MentorRegisterPage() {
   };
 
   const submitInfo = async () => {
-    const res1 = await axios.post('http://43.201.17.248:8080/role', null, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('JWT_TOKEN')}`,
-      },
-    });
+    try {
+      await axios.post('http://43.201.17.248:8080/role', null, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('JWT_TOKEN')}`,
+        },
+      });
 
-    console.log(res1.data);
+      const res = await axios.post('http://43.201.17.248:8080/mentor/info', info, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('JWT_TOKEN')}`,
+        },
+      });
 
-    const res = await axios.post('http://43.201.17.248:8080/mentor/info', info, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('JWT_TOKEN')}`,
-      },
-    });
-
-    console.log(res.data);
-
-    if (res.status === 200) {
-      navigate('/');
-    } else {
+      if (res.status === 200) {
+        navigate('/');
+      }
+    } catch (err) {
+      console.error(err);
       alert('필수 값을 모두 입력하세요');
     }
   };
