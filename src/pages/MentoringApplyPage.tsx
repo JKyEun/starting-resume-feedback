@@ -1,13 +1,49 @@
 import React, { useRef, useState } from 'react';
 import '../style/mentoringApplyPage.scss';
+import axios from 'axios';
+import { useParams } from 'react-router';
 
 export default function MentoringApplyPage() {
   const [moreLink, setMoreLink] = useState<number[]>([]);
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const modalRef = useRef<HTMLDivElement>(null);
+  const { id } = useParams();
+  const phone = useRef<HTMLInputElement>(null);
+  const email = useRef<HTMLInputElement>(null);
+  const content = useRef<HTMLTextAreaElement>(null);
+  const [url, setUrl] = useState<string[]>([]);
+
+  const onUrlChange = (e: any, idx: any) => {
+    url[idx] = e.target.value;
+    setUrl(url);
+  };
 
   const convertModal = () => {
     setModalOpen((cur) => !cur);
+  };
+
+  const sendEmail = async () => {
+    setModalOpen((cur) => !cur);
+
+    const requestForm = {
+      phone: phone.current?.value,
+      email: email.current?.value,
+      url,
+      content: content.current?.value,
+      schedules: [],
+    };
+
+    try {
+      const res = await axios.post(`http://43.201.17.248:8080/mentoring/${id}`, requestForm, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('JWT_TOKEN')}`,
+        },
+      });
+
+      console.log(res.data);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -25,27 +61,27 @@ export default function MentoringApplyPage() {
                 <span>18:00</span>
               </div>
               <div>
-                <span className="day">월</span>
+                <span className="day">화</span>
                 <span>18:00</span>
               </div>
               <div>
-                <span className="day">월</span>
+                <span className="day">수</span>
                 <span>18:00</span>
               </div>
               <div>
-                <span className="day">월</span>
+                <span className="day">목</span>
                 <span>18:00</span>
               </div>
               <div>
-                <span className="day">월</span>
+                <span className="day">금</span>
                 <span>18:00</span>
               </div>
               <div>
-                <span className="day">월</span>
+                <span className="day">토</span>
                 <span>18:00</span>
               </div>
               <div>
-                <span className="day">월</span>
+                <span className="day">일</span>
                 <span>18:00</span>
               </div>
             </div>
@@ -71,16 +107,23 @@ export default function MentoringApplyPage() {
               스타팅 이력서 URL <span>*</span>
             </div>
             <div>
-              <input type="text" />
+              <input onChange={(e) => onUrlChange(e, 0)} type="text" />
             </div>
-            {moreLink.map((el) => (
+            {moreLink.map((el, idx) => (
               <div key={el} className="more-link">
-                <input placeholder="관련 링크를 입력해주세요" type="text" />
+                <input
+                  onChange={(e) => onUrlChange(e, idx + 1)}
+                  value={url[idx + 1]}
+                  placeholder="관련 링크를 입력해주세요"
+                  type="text"
+                />
                 <input placeholder="링크를 소개해주세요" type="text" />
                 <div
                   onClick={() => {
                     const newArr = moreLink.filter((filterEl) => filterEl !== el);
                     setMoreLink(newArr);
+                    const newArr2 = url.filter((urlEl) => urlEl !== url[idx + 1]);
+                    setUrl(newArr2);
                   }}>
                   <img src="/images/cancel.svg" alt="삭제" />
                 </div>
@@ -135,7 +178,7 @@ export default function MentoringApplyPage() {
                   <div onClick={convertModal} className="close">
                     결제취소
                   </div>
-                  <div onClick={convertModal} className="complete">
+                  <div onClick={sendEmail} className="complete">
                     결제완료
                   </div>
                 </div>

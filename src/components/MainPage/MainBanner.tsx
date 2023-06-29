@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router';
 export default function MainBanner() {
   const randomNumber = Math.floor(Math.random() * 3);
   const navigate = useNavigate();
-  console.log(randomNumber);
   const imgArr = ['/images/banner0.svg', '/images/banner1.svg', '/images/banner2.svg'];
 
   const onBannerClick = () => {

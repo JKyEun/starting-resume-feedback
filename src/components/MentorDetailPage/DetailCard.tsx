@@ -1,6 +1,10 @@
 import React from 'react';
+import { useNavigate, useParams } from 'react-router';
 
 export default function DetailCard() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+
   return (
     <div className="detail-card">
       <img className="profile-img" src="/images/demoImg.svg" alt="프로필 이미지" />
@@ -32,7 +36,9 @@ export default function DetailCard() {
           </span>
           <span>000</span>
         </div>
-        <div className="apply">멘토링 신청하기</div>
+        <div onClick={() => navigate(`/${id}/apply`)} className="apply">
+          멘토링 신청하기
+        </div>
       </div>
     </div>
   );
