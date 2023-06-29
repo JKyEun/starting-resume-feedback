@@ -69,6 +69,11 @@
           .img-wrap {
             width: 140px;
             height: 140px;
+            .black {
+              position: absolute;
+              width: 140px;
+              height: 140px;
+            }
             .input-btn {
               display: none;
             }
@@ -77,6 +82,10 @@
             }
           }
           .img-wrap:hover {
+            .black {
+              background: rgba(0, 0, 0, 0.5);
+              border-radius: 20px;
+            }
             .input-btn {
               position: absolute;
               display: flex;

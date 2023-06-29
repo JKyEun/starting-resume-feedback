@@ -9,6 +9,7 @@ export default function BasicInfo() {
   const [isDisabled, setDisabled] = useState<boolean>(true);
   const [specificJob, setSpecificJob] = useState<any>(null);
   const fileInput = useRef<HTMLInputElement>(null);
+  const imgInput = useRef<HTMLInputElement>(null);
   const [fileName, setFileName] = useState<string>('');
   const name = useRef<HTMLInputElement>(null);
   const nickname = useRef<HTMLInputElement>(null);
@@ -46,7 +47,9 @@ export default function BasicInfo() {
     const res = await axios.post('http://43.201.17.248:8080/mentor/profile-image', formData, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('JWT_TOKEN')}`,
+        'Content-Type': 'multipart/form-data',
       },
+      withCredentials: true,
     });
 
     console.log(res.data);
@@ -91,11 +94,12 @@ export default function BasicInfo() {
           프로필 사진 <span>*</span>
         </div>
         <div className="img-wrap">
-          <img src="/images/basic-img.svg" alt="기본 이미지" />
+          <div className="black"></div>
+          <img className="profile" src="/images/basic-img.svg" alt="프로필 이미지" />
           <label className="input-btn" htmlFor="img-input">
             <img src="/images/edit.svg" alt="연필" />
           </label>
-          <input id="img-input" type="file" />
+          <input onChange={sendImg} ref={imgInput} id="img-input" type="file" />
         </div>
       </div>
       <div className="name frame">
