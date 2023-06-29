@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router';
 import BasicInfo from '../components/MentorRegisterPage/BasicInfo';
 import '../style/mentorRegisterPage.scss';
 import MentoringInfo from '../components/MentorRegisterPage/MentoringInfo';
 import MentoringMethod from '../components/MentorRegisterPage/MentoringMethod';
+import { useAppSelector } from '../store';
 
 export default function MentorRegisterPage() {
   const [curScroll, setCurScroll] = useState<number>(1);
+  const info = useAppSelector((state) => state.mentorRegistor);
+  const navigate = useNavigate();
   const INFO_SCROLL_NUM = 1135;
   const METHOD_SCROLL_NUM = 2087;
 
@@ -24,6 +29,34 @@ export default function MentorRegisterPage() {
       document.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  const saveInfo = () => {
+    localStorage.setItem('MENTOR_REGISTER_INFO', JSON.stringify(info));
+  };
+
+  const submitInfo = async () => {
+    const res1 = await axios.post('http://43.201.17.248:8080/role', null, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('JWT_TOKEN')}`,
+      },
+    });
+
+    console.log(res1.data);
+
+    const res = await axios.post('http://43.201.17.248:8080/mentor/info', info, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('JWT_TOKEN')}`,
+      },
+    });
+
+    console.log(res.data);
+
+    if (res.status === 200) {
+      navigate('/');
+    } else {
+      alert('필수 값을 모두 입력하세요');
+    }
+  };
 
   return (
     <div className="page">
@@ -57,8 +90,12 @@ export default function MentorRegisterPage() {
           </div>
         </div>
         <div className="save-register">
-          <div className="save">저장하기</div>
-          <div className="register">멘토 등록하기</div>
+          <div onClick={saveInfo} className="save">
+            저장하기
+          </div>
+          <div onClick={submitInfo} className="register">
+            멘토 등록하기
+          </div>
         </div>
       </div>
     </div>

@@ -31,7 +31,7 @@
     "prefer-arrow-callback": "error",
     "require-await": "error",
     "arrow-parens": "off",
-    "no-param-reassign": ["error", { "props": false }],
+    "no-param-reassign": "off",
     "@typescript-eslint/no-shadow": "off",
     "react/jsx-props-no-spreading": "off",
     "react/self-closing-comp": "off",

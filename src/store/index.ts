@@ -70,10 +70,68 @@ const filterSlice = createSlice({
   },
 });
 
+type MentorRegistorState = {
+  name: string;
+  nickname: string;
+  company: string;
+  job: string;
+  subjob: string;
+  year: string;
+  bank: string;
+  bankNumber: string;
+  bankOwner: string;
+  title: string;
+  introduce: string;
+  possibles: string;
+  concept: string;
+  target: string;
+  prepare: string;
+  curriculum: string;
+  rule: string;
+  time: string;
+  cost: number;
+  schedules: object[];
+};
+
+const initialMentorRegistorState: MentorRegistorState = {
+  name: '',
+  nickname: '',
+  company: '',
+  job: '',
+  subjob: '',
+  year: '',
+  bank: '',
+  bankNumber: '',
+  bankOwner: '',
+  title: '',
+  introduce: '',
+  possibles: '',
+  concept: '',
+  target: '',
+  prepare: '',
+  curriculum: '',
+  rule: '',
+  time: '',
+  cost: 0,
+  schedules: [],
+};
+
+const mentorRegisterSlice = createSlice({
+  name: 'mentorRegister',
+  initialState: initialMentorRegistorState,
+  reducers: {
+    setMentorRegister: (state, action: PayloadAction<object>) => {
+      state = { ...state, ...action.payload };
+      return state;
+    },
+  },
+});
+
 const store = configureStore({
   reducer: {
     auth: authSlice.reducer,
     filter: filterSlice.reducer,
+    mentorRegistor: mentorRegisterSlice.reducer,
   },
 });
 
@@ -83,4 +141,5 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 export const useAppDispatch: () => AppDispatch = useDispatch;
 export const { login, logout } = authSlice.actions;
 export const { setJobFolder, setJob, removeJob, setCompany, removeCompany, setOrder } = filterSlice.actions;
+export const { setMentorRegister } = mentorRegisterSlice.actions;
 export default store;
