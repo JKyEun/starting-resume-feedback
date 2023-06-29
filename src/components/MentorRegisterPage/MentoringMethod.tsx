@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
+import { setMentorRegister, useAppDispatch } from '../../store';
 
 export default function MentoringMethod() {
   const [monTime, setMonTime] = useState<string[]>(['']);
@@ -17,11 +18,34 @@ export default function MentoringMethod() {
     ['토', satTime, setSatTime],
     ['일', sunTime, setSunTime],
   ];
+  const curriculum = useRef<HTMLTextAreaElement>(null);
+  const time = useRef<HTMLInputElement>(null);
+  const price = useRef<HTMLInputElement>(null);
+  const dispatch = useAppDispatch();
 
   const setTime = (dayTime: any, setDayTime: any, idx: any, time: any) => {
     const arr = dayTime;
     arr[idx] = time;
     setDayTime(arr);
+  };
+
+  const sendInfo = () => {
+    const info = {
+      curriculum: curriculum.current?.value,
+      time: time.current?.value,
+      price: price.current?.value,
+      schedules: [
+        { day: '월', time: monTime },
+        { day: '화', time: tueTime },
+        { day: '수', time: wedTime },
+        { day: '목', time: thuTime },
+        { day: '금', time: friTime },
+        { day: '토', time: satTime },
+        { day: '일', time: sunTime },
+      ],
+    };
+
+    dispatch(setMentorRegister(info));
   };
 
   return (
@@ -32,7 +56,7 @@ export default function MentoringMethod() {
           진행 수단 <span>*</span>
         </div>
         <div>
-          <textarea></textarea>
+          <textarea onChange={sendInfo} ref={curriculum}></textarea>
         </div>
       </div>
       <div className="time">
@@ -40,7 +64,7 @@ export default function MentoringMethod() {
           1회 진행 시간 <span>*</span>
         </div>
         <div>
-          <input type="text" />
+          <input onChange={sendInfo} ref={time} type="text" />
         </div>
       </div>
       <div className="price">
@@ -48,7 +72,7 @@ export default function MentoringMethod() {
           1회 가격 <span>*</span>
         </div>
         <div>
-          <input type="text" />
+          <input onChange={sendInfo} ref={price} type="number" />
         </div>
       </div>
       <div className="available">
@@ -67,6 +91,7 @@ export default function MentoringMethod() {
                     key={el + idx.toString()}
                     onChange={(e) => {
                       setTime(timeEl[1], timeEl[2], idx, e.target.value);
+                      sendInfo();
                     }}
                     className="time"
                     type="time"

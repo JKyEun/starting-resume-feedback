@@ -21,7 +21,8 @@
       span {
         color: #317eff;
       }
-      input[type='text'] {
+      input[type='text'],
+      input[type='number'] {
         padding: 12px 16px;
         width: 100%;
         border-radius: 8px;
@@ -64,6 +65,33 @@
         flex-direction: column;
         margin-bottom: 40px;
         padding: 36px;
+        .profile-img {
+          .img-wrap {
+            width: 140px;
+            height: 140px;
+            .input-btn {
+              display: none;
+            }
+            #img-input {
+              display: none;
+            }
+          }
+          .img-wrap:hover {
+            .input-btn {
+              position: absolute;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              width: 35px;
+              height: 35px;
+              left: 88px;
+              top: 177px;
+              background-color: #ccc;
+              border-radius: 50%;
+              cursor: pointer;
+            }
+          }
+        }
         .job {
           margin-bottom: 8px;
           div:nth-child(2) {

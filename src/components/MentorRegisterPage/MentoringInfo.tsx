@@ -1,6 +1,28 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { setMentorRegister, useAppDispatch } from '../../store';
 
 export default function MentoringInfo() {
+  const title = useRef<HTMLInputElement>(null);
+  const introduce = useRef<HTMLTextAreaElement>(null);
+  const possibles = useRef<HTMLInputElement>(null);
+  const concept = useRef<HTMLTextAreaElement>(null);
+  const target = useRef<HTMLInputElement>(null);
+  const prepare = useRef<HTMLTextAreaElement>(null);
+  const dispatch = useAppDispatch();
+
+  const sendInfo = () => {
+    const info = {
+      title: title.current?.value,
+      introduce: introduce.current?.value,
+      possibles: possibles.current?.value,
+      concept: concept.current?.value,
+      target: target.current?.value,
+      prepare: prepare.current?.value,
+    };
+
+    dispatch(setMentorRegister(info));
+  };
+
   return (
     <div className="mentoring-info">
       <div className="title">멘토링 정보</div>
@@ -9,7 +31,7 @@ export default function MentoringInfo() {
           한줄 소개 <span>*</span>
         </div>
         <div>
-          <input type="text" />
+          <input onChange={sendInfo} ref={title} type="text" />
         </div>
       </div>
       <div className="mentor-introduce">
@@ -17,7 +39,7 @@ export default function MentoringInfo() {
           멘토 소개 <span>*</span>
         </div>
         <div>
-          <textarea></textarea>
+          <textarea onChange={sendInfo} ref={introduce}></textarea>
         </div>
       </div>
       <div className="range">
@@ -25,7 +47,7 @@ export default function MentoringInfo() {
           멘토링 가능 분야 <span>*</span>
         </div>
         <div>
-          <input type="text" />
+          <input onChange={sendInfo} ref={possibles} type="text" />
         </div>
       </div>
       <div className="subject">
@@ -33,7 +55,7 @@ export default function MentoringInfo() {
           멘토링 주제 <span>*</span>
         </div>
         <div>
-          <textarea></textarea>
+          <textarea onChange={sendInfo} ref={concept}></textarea>
         </div>
       </div>
       <div className="target">
@@ -41,7 +63,7 @@ export default function MentoringInfo() {
           멘토링 대상 <span>*</span>
         </div>
         <div>
-          <input type="text" />
+          <input onChange={sendInfo} ref={target} type="text" />
         </div>
       </div>
       <div className="prepare">
@@ -49,7 +71,7 @@ export default function MentoringInfo() {
           멘티 준비사항 <span>*</span>
         </div>
         <div>
-          <textarea></textarea>
+          <textarea onChange={sendInfo} ref={prepare}></textarea>
         </div>
       </div>
     </div>

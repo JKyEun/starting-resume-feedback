@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import Select from 'react-select';
 import axios from 'axios';
 import { classArr, getSpecificJob, mentoYearSelect } from '../../util/constant';
+import { setMentorRegister, useAppDispatch } from '../../store';
 
 export default function BasicInfo() {
   const [jobFolder, setJobFolder] = useState<any>('직군을 선택하세요');
@@ -9,57 +10,62 @@ export default function BasicInfo() {
   const [specificJob, setSpecificJob] = useState<any>(null);
   const fileInput = useRef<HTMLInputElement>(null);
   const [fileName, setFileName] = useState<string>('');
-
-  console.log(fileInput);
+  const name = useRef<HTMLInputElement>(null);
+  const nickname = useRef<HTMLInputElement>(null);
+  const company = useRef<HTMLInputElement>(null);
+  const jobSpecific = useRef<any>(null);
+  const year = useRef<any>(null);
+  const bankName = useRef<HTMLInputElement>(null);
+  const account = useRef<HTMLInputElement>(null);
+  const accountName = useRef<HTMLInputElement>(null);
+  const dispatch = useAppDispatch();
 
   const sendFile = async () => {
     const formData = new FormData();
     const files = fileInput.current?.files as FileList;
     if (files.length > 0) {
-      formData.append('file', files[0]);
+      formData.append('resume', files[0]);
     }
-    const res = await axios.post(
-      'http://43.201.17.248:8080/mentor/resume',
-      { resume: formData },
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('JWT_TOKEN')}`,
-          'Content-Type': 'multipart/form-data',
-        },
-      }
-    );
+    const res = await axios.post('http://43.201.17.248:8080/mentor/resume', formData, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('JWT_TOKEN')}`,
+        'Content-Type': 'multipart/form-data',
+      },
+      withCredentials: true,
+    });
 
     console.log(res.data);
-    // const res = await fetch(`http://43.201.17.248:8080/mentor/resume`, {
-    //   method: 'POST',
-    //   headers: {
-    //     Authorization: `Bearer ${localStorage.getItem('JWT_TOKEN')}`,
-    //     'Content-type': 'multipart/form-data',
-    //   },
-    //   body: JSON.stringify({ resume: formData }),
-    // });
-    // const data = await res.json();
-
-    // console.log(data);
   };
 
   const sendImg = async () => {
     const formData = new FormData();
     const files = fileInput.current?.files as FileList;
     if (files.length > 0) {
-      formData.append('file', files[0]);
+      formData.append('image', files[0]);
     }
-    const res = await axios.post(
-      'http://43.201.17.248:8080/mentor/profile-image',
-      { image: formData },
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('JWT_TOKEN')}`,
-        },
-      }
-    );
+    const res = await axios.post('http://43.201.17.248:8080/mentor/profile-image', formData, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('JWT_TOKEN')}`,
+      },
+    });
 
     console.log(res.data);
+  };
+
+  const sendInfo = () => {
+    const basicInfo = {
+      name: name.current?.value,
+      nickname: nickname.current?.value,
+      company: company.current?.value,
+      job: jobFolder,
+      subjob: jobSpecific.current?.props?.value?.label,
+      year: year.current?.props?.value?.label,
+      bank: bankName.current?.value,
+      bankNumber: account.current?.value,
+      bankOwner: accountName.current?.value,
+    };
+
+    dispatch(setMentorRegister(basicInfo));
   };
 
   const style = {
@@ -84,8 +90,12 @@ export default function BasicInfo() {
         <div>
           프로필 사진 <span>*</span>
         </div>
-        <div>
+        <div className="img-wrap">
           <img src="/images/basic-img.svg" alt="기본 이미지" />
+          <label className="input-btn" htmlFor="img-input">
+            <img src="/images/edit.svg" alt="연필" />
+          </label>
+          <input id="img-input" type="file" />
         </div>
       </div>
       <div className="name frame">
@@ -93,7 +103,7 @@ export default function BasicInfo() {
           이름 <span>*</span> <span className="badge">멘티에게 공개되지 않습니다</span>
         </div>
         <div>
-          <input type="text" />
+          <input onChange={sendInfo} ref={name} type="text" />
         </div>
       </div>
       <div className="nickname frame">
@@ -101,7 +111,7 @@ export default function BasicInfo() {
           닉네임 <span>*</span> <span className="badge">멘토링 시 노출되는 닉네임입니다</span>
         </div>
         <div>
-          <input type="text" />
+          <input onChange={sendInfo} ref={nickname} type="text" />
         </div>
       </div>
       <div className="company frame">
@@ -109,7 +119,7 @@ export default function BasicInfo() {
           회사명 <span>*</span>
         </div>
         <div>
-          <input type="text" />
+          <input onChange={sendInfo} ref={company} type="text" />
         </div>
       </div>
       <div className="job frame">
@@ -122,6 +132,7 @@ export default function BasicInfo() {
               setDisabled(false);
               setJobFolder(el?.value);
               setSpecificJob(getSpecificJob(el?.value));
+              sendInfo();
             }}
             styles={style}
             theme={(theme) => ({
@@ -135,6 +146,8 @@ export default function BasicInfo() {
             isSearchable={false}
           />
           <Select
+            onChange={sendInfo}
+            ref={jobSpecific}
             placeholder="직무를 선택하세요"
             styles={style}
             theme={(theme) => ({
@@ -155,6 +168,8 @@ export default function BasicInfo() {
         </div>
         <div>
           <Select
+            onChange={sendInfo}
+            ref={year}
             placeholder="경력기간을 선택하세요"
             styles={{
               control: (baseStyles: any) => ({
@@ -194,6 +209,7 @@ export default function BasicInfo() {
               onChange={(e) => {
                 setFileName(e.target.value);
                 sendFile();
+                sendInfo();
               }}
               ref={fileInput}
               type="file"
@@ -208,7 +224,7 @@ export default function BasicInfo() {
             은행명 <span>*</span>
           </div>
           <div>
-            <input placeholder="00은행" type="text" />
+            <input onChange={sendInfo} ref={bankName} placeholder="00은행" type="text" />
           </div>
         </div>
         <div>
@@ -216,7 +232,7 @@ export default function BasicInfo() {
             계좌번호 <span>*</span>
           </div>
           <div>
-            <input type="text" />
+            <input onChange={sendInfo} ref={account} type="text" />
           </div>
         </div>
         <div>
@@ -224,7 +240,7 @@ export default function BasicInfo() {
             예금주 <span>*</span>
           </div>
           <div>
-            <input type="text" />
+            <input onChange={sendInfo} ref={accountName} type="text" />
           </div>
         </div>
       </div>
