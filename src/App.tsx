@@ -27,7 +27,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<SignInPage />} />
         <Route path="/" element={<MainPage />} />
-        <Route path="/1" element={<MentorDetailPage />} />
+        <Route path="/:id" element={<MentorDetailPage />} />
         <Route path="/1/apply" element={<MentoringApplyPage />} />
         <Route path="/register" element={<MentorregisterPage />} />
         <Route path="/oauth/callback/kakao" element={<KakaoRedirectHandler />} />
