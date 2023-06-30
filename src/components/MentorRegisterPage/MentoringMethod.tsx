@@ -1,33 +1,15 @@
-import React, { useRef, useState } from 'react';
-import { setMentorRegister, useAppDispatch } from '../../store';
+import React, { useRef } from 'react';
+import { setMentorRegister, useAppDispatch, useAppSelector } from '../../store';
+import AvailableTime from './AvailableTime';
 
 export default function MentoringMethod() {
-  const [monTime, setMonTime] = useState<string[]>(['']);
-  const [tueTime, setTueTime] = useState<string[]>(['']);
-  const [wedTime, setWedTime] = useState<string[]>(['']);
-  const [thuTime, setThuTime] = useState<string[]>(['']);
-  const [friTime, setFriTime] = useState<string[]>(['']);
-  const [satTime, setSatTime] = useState<string[]>(['']);
-  const [sunTime, setSunTime] = useState<string[]>(['']);
-  const timeArr = [
-    ['월', monTime, setMonTime],
-    ['화', tueTime, setTueTime],
-    ['수', wedTime, setWedTime],
-    ['목', thuTime, setThuTime],
-    ['금', friTime, setFriTime],
-    ['토', satTime, setSatTime],
-    ['일', sunTime, setSunTime],
-  ];
+  const oneWeek = ['월', '화', '수', '목', '금', '토', '일'];
   const curriculum = useRef<HTMLTextAreaElement>(null);
   const time = useRef<HTMLInputElement>(null);
   const price = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
-
-  const setTime = (dayTime: any, setDayTime: any, idx: any, time: any) => {
-    const arr = [...dayTime];
-    arr[idx] = time;
-    setDayTime(arr);
-  };
+  const schedule = useAppSelector((state) => state.schedule);
+  const scheduleArr = Object.values(schedule);
 
   const sendInfo = () => {
     const info = {
@@ -35,13 +17,13 @@ export default function MentoringMethod() {
       time: time.current?.value,
       price: price.current?.value,
       schedules: [
-        { day: '월', time: monTime },
-        { day: '화', time: tueTime },
-        { day: '수', time: wedTime },
-        { day: '목', time: thuTime },
-        { day: '금', time: friTime },
-        { day: '토', time: satTime },
-        { day: '일', time: sunTime },
+        { day: '월', time: schedule[0] },
+        { day: '화', time: schedule[1] },
+        { day: '수', time: schedule[2] },
+        { day: '목', time: schedule[3] },
+        { day: '금', time: schedule[4] },
+        { day: '토', time: schedule[5] },
+        { day: '일', time: schedule[6] },
       ],
     };
 
@@ -80,31 +62,21 @@ export default function MentoringMethod() {
           멘토링 가능 시간 <span>*</span>
         </div>
         <div className="time-picker">
-          {timeArr.map((timeEl: any) => (
-            <div key={timeEl[0]}>
+          {oneWeek.map((day, dayIdx) => (
+            <div key={day}>
               <span className="day">
-                <img src="/images/check.svg" alt="체크" /> <span>{timeEl[0]}</span>
+                <img src="/images/check.svg" alt="체크" /> <span>{day}</span>
               </span>
               <span>
-                {timeEl[1].map((el: string, idx: number) => (
-                  <input
-                    key={el + idx.toString()}
-                    onChange={(e) => {
-                      setTime(timeEl[1], timeEl[2], idx, e.target.value);
-                      sendInfo();
-                    }}
-                    value={timeEl[1]}
-                    className="time"
-                    type="time"
+                {scheduleArr[dayIdx].map((schedule, timeIdx) => (
+                  <AvailableTime
+                    key={schedule.id}
+                    sendInfo={sendInfo}
+                    schedule={schedule}
+                    dayIdx={dayIdx}
+                    timeIdx={timeIdx}
                   />
                 ))}
-              </span>
-              <span
-                onClick={() => {
-                  timeEl[2]([...timeEl[1], '']);
-                }}
-                className="add">
-                추가
               </span>
             </div>
           ))}

@@ -29,15 +29,18 @@ export default function BasicInfo() {
     if (files.length > 0) {
       formData.append('resume', files[0]);
     }
-    const res = await axios.post('http://43.201.17.248:8080/mentor/resume', formData, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('JWT_TOKEN')}`,
-        'Content-Type': 'multipart/form-data',
-      },
-      withCredentials: true,
-    });
-
-    console.log(res.data);
+    try {
+      const res = await axios.post('http://43.201.17.248:8080/mentor/resume', formData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('JWT_TOKEN')}`,
+          'Content-Type': 'multipart/form-data',
+        },
+        withCredentials: true,
+      });
+      console.log(res.data);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const sendImg = async () => {
@@ -46,17 +49,19 @@ export default function BasicInfo() {
     if (files.length > 0) {
       formData.append('image', files[0]);
     }
-    const res = await axios.post('http://43.201.17.248:8080/mentor/profile-image', formData, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('JWT_TOKEN')}`,
-        'Content-Type': 'multipart/form-data',
-      },
-      withCredentials: true,
-    });
-
-    setImgUrl(res.data.url);
-
-    console.log(res.data);
+    try {
+      const res = await axios.post('http://43.201.17.248:8080/mentor/profile-image', formData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('JWT_TOKEN')}`,
+          'Content-Type': 'multipart/form-data',
+        },
+        withCredentials: true,
+      });
+      console.log(res.data);
+      setImgUrl(res.data.url);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const sendInfo = () => {
@@ -95,7 +100,7 @@ export default function BasicInfo() {
           <label className="input-btn" htmlFor="img-input">
             <img src="/images/edit.svg" alt="연필" />
           </label>
-          <input onChange={sendImg} ref={imgInput} id="img-input" type="file" />
+          <input onChange={sendImg} ref={imgInput} id="img-input" accept="image/*" type="file" />
         </div>
       </div>
       <div className="name frame">
