@@ -134,16 +134,6 @@ type EachDay = {
   time: string;
 };
 
-type ScheduleState = {
-  0: EachDay[];
-  1: EachDay[];
-  2: EachDay[];
-  3: EachDay[];
-  4: EachDay[];
-  5: EachDay[];
-  6: EachDay[];
-};
-
 const initialScheduleState: Array<EachDay[]> = [
   [{ id: 0, time: '' }],
   [{ id: 0, time: '' }],

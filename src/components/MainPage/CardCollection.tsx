@@ -12,8 +12,6 @@ export default function CardCollection() {
 
   const { data, isLoading, isError } = useQuery('mentors', getMentors);
 
-  console.log(data);
-
   if (isLoading || isError) return <Loading />;
 
   if (filter.job.length !== 0) {

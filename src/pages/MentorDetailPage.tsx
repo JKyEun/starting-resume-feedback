@@ -13,8 +13,8 @@ export default function MentorDetailPage() {
     const getInfo = async () => {
       try {
         const res = await axios.get(`http://43.201.17.248:8080/mentor/${id}`);
-        console.log(res.data);
         setMentorInfo(res.data);
+        console.log(res.data);
       } catch (err) {
         console.error(err);
       }
