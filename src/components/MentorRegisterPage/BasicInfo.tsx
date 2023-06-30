@@ -30,14 +30,13 @@ export default function BasicInfo() {
       formData.append('resume', files[0]);
     }
     try {
-      const res = await axios.post('http://43.201.17.248:8080/mentor/resume', formData, {
+      await axios.post('http://43.201.17.248:8080/mentor/resume', formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('JWT_TOKEN')}`,
           'Content-Type': 'multipart/form-data',
         },
         withCredentials: true,
       });
-      console.log(res.data);
     } catch (err) {
       console.error(err);
     }
@@ -57,7 +56,6 @@ export default function BasicInfo() {
         },
         withCredentials: true,
       });
-      console.log(res.data);
       setImgUrl(res.data.url);
     } catch (err) {
       console.error(err);

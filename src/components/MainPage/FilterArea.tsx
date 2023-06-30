@@ -2,7 +2,6 @@ import React from 'react';
 import CompanyFilter from './CompanyFilter';
 import '../../style/filterArea.scss';
 import JobFilter from './JobFilter';
-import SortingRule from './SortingRule';
 
 export default function FilterArea() {
   return (
@@ -10,7 +9,7 @@ export default function FilterArea() {
       <div className="inner">
         <JobFilter />
         <CompanyFilter />
-        <SortingRule />
+        {/* <SortingRule /> */}
       </div>
     </div>
   );
