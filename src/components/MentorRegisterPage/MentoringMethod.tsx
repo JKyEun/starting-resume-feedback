@@ -14,7 +14,7 @@ export default function MentoringMethod() {
   const sendInfo = () => {
     const info = {
       curriculum: curriculum.current?.value,
-      time: time.current?.value,
+      time: time.current?.value.toString(),
       price: price.current?.value,
       schedules: [
         { day: '월', time: schedule[0] },
@@ -43,10 +43,10 @@ export default function MentoringMethod() {
       </div>
       <div className="time">
         <div>
-          1회 진행 시간 <span>*</span>
+          1회 진행 시간 (분 단위로 입력해주세요) <span>*</span>
         </div>
         <div>
-          <input onChange={sendInfo} ref={time} type="text" />
+          <input onChange={sendInfo} ref={time} type="number" />
         </div>
       </div>
       <div className="price">
