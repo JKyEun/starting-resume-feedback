@@ -201,7 +201,9 @@ export default function MentoringApplyPage() {
                   <br />
                   결제 QR은 마이 멘토링에서 재확인 가능
                 </div>
-                <div className="QR"></div>
+                <div className="QR">
+                  <img src="/images/test-QR.jpg" alt="QR코드" />
+                </div>
                 <div className="price">00,000원</div>
                 <div className="btns">
                   <div onClick={convertModal} className="close">

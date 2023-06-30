@@ -14,7 +14,6 @@ export default function MentorDetailPage() {
       try {
         const res = await axios.get(`http://43.201.17.248:8080/mentor/${id}`);
         setMentorInfo(res.data);
-        console.log(res.data);
       } catch (err) {
         console.error(err);
       }
