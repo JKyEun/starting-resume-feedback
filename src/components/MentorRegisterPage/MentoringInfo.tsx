@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { setMentorRegister, useAppDispatch } from '../../store';
 
 export default function MentoringInfo() {
@@ -22,6 +22,19 @@ export default function MentoringInfo() {
 
     dispatch(setMentorRegister(info));
   };
+
+  useEffect(() => {
+    const mentorInfo = localStorage.getItem('MENTOR_REGISTER_INFO');
+    if (mentorInfo) {
+      const parsedMentorInfo = JSON.parse(mentorInfo);
+      if (title.current) title.current.value = parsedMentorInfo.title;
+      if (introduce.current) introduce.current.value = parsedMentorInfo.introduce;
+      if (possibles.current) possibles.current.value = parsedMentorInfo.possibles;
+      if (concept.current) concept.current.value = parsedMentorInfo.concept;
+      if (target.current) target.current.value = parsedMentorInfo.target;
+      if (prepare.current) prepare.current.value = parsedMentorInfo.prepare;
+    }
+  }, []);
 
   return (
     <div className="mentoring-info">

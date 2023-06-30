@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Select from 'react-select';
 import axios from 'axios';
 import { classArr, companyTypeList, getSpecificJob, mentoYearSelect, style, style2 } from '../../util/constant';
@@ -78,6 +78,19 @@ export default function BasicInfo() {
 
     dispatch(setMentorRegister(basicInfo));
   };
+
+  useEffect(() => {
+    const mentorInfo = localStorage.getItem('MENTOR_REGISTER_INFO');
+    if (mentorInfo) {
+      const parsedMentorInfo = JSON.parse(mentorInfo);
+      if (name.current) name.current.value = parsedMentorInfo.name;
+      if (nickname.current) nickname.current.value = parsedMentorInfo.nickname;
+      if (company.current) company.current.value = parsedMentorInfo.company;
+      if (bankName.current) bankName.current.value = parsedMentorInfo.bank;
+      if (account.current) account.current.value = parsedMentorInfo.bankNumber;
+      if (accountName.current) accountName.current.value = parsedMentorInfo.bankOwner;
+    }
+  }, []);
 
   return (
     <div className="basic-info">

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { setMentorRegister, useAppDispatch, useAppSelector } from '../../store';
 import AvailableTime from './AvailableTime';
 
@@ -14,7 +14,7 @@ export default function MentoringMethod() {
   const sendInfo = () => {
     const info = {
       curriculum: curriculum.current?.value,
-      time: time.current?.value.toString(),
+      time: time.current?.value,
       price: price.current?.value,
       schedules: [
         { day: '월', time: schedule[0] },
@@ -29,6 +29,16 @@ export default function MentoringMethod() {
 
     dispatch(setMentorRegister(info));
   };
+
+  useEffect(() => {
+    const mentorInfo = localStorage.getItem('MENTOR_REGISTER_INFO');
+    if (mentorInfo) {
+      const parsedMentorInfo = JSON.parse(mentorInfo);
+      if (time.current) time.current.value = parsedMentorInfo.time;
+      if (curriculum.current) curriculum.current.value = parsedMentorInfo.curriculum;
+      if (price.current) price.current.value = parsedMentorInfo.price;
+    }
+  }, []);
 
   return (
     <div className="mentoring-method">

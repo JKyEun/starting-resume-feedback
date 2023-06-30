@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
-import BasicInfo from '../components/MentorRegisterPage/BasicInfo';
 import '../style/mentorRegisterPage.scss';
+import BasicInfo from '../components/MentorRegisterPage/BasicInfo';
 import MentoringInfo from '../components/MentorRegisterPage/MentoringInfo';
 import MentoringMethod from '../components/MentorRegisterPage/MentoringMethod';
 import { useAppSelector } from '../store';
