@@ -204,7 +204,7 @@ export default function MentoringApplyPage() {
                 <div className="QR">
                   <img src="/images/test-QR.jpg" alt="QR코드" />
                 </div>
-                <div className="price">00,000원</div>
+                <div className="price">{mentorInfo.cost}원</div>
                 <div className="btns">
                   <div onClick={convertModal} className="close">
                     결제취소
