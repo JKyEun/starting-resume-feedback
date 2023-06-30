@@ -5,6 +5,7 @@ export default function EachTime({ time, dayIdx, timeIdx }: { time: string; dayI
   const [isTimeClicked, setTimeClicked] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const scheduleInStore = useAppSelector((state) => state.schedule);
+  console.log(time);
 
   const convertTime = () => {
     setTimeClicked((cur) => !cur);
@@ -31,9 +32,9 @@ export default function EachTime({ time, dayIdx, timeIdx }: { time: string; dayI
     }
   };
 
-  return (
+  return time !== '' ? (
     <span onClick={convertTime} className={isTimeClicked ? 'clicked' : ''}>
       {time}
     </span>
-  );
+  ) : null;
 }

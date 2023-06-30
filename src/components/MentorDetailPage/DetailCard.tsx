@@ -22,7 +22,7 @@ export default function DetailCard({ mentorInfo }: { mentorInfo: any }) {
       <div className="num">
         <div>
           <div>멘토링 횟수</div>
-          <div>{mentorInfo.cost}회</div>
+          <div>0회</div>
         </div>
         <div>
           <div>후기 수</div>
