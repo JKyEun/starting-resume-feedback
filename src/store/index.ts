@@ -129,11 +129,45 @@ const mentorRegisterSlice = createSlice({
   },
 });
 
+type EachDay = {
+  id: number;
+  time: string;
+};
+
+type ScheduleState = {
+  0: EachDay[];
+  1: EachDay[];
+  2: EachDay[];
+  3: EachDay[];
+  4: EachDay[];
+  5: EachDay[];
+  6: EachDay[];
+};
+
+const initialScheduleState: Array<EachDay[]> = [
+  [{ id: 0, time: '' }],
+  [{ id: 0, time: '' }],
+  [{ id: 0, time: '' }],
+  [{ id: 0, time: '' }],
+  [{ id: 0, time: '' }],
+  [{ id: 0, time: '' }],
+  [{ id: 0, time: '' }],
+];
+
+const scheduleSlice = createSlice({
+  name: 'schedule',
+  initialState: initialScheduleState,
+  reducers: {
+    setSchedule: (state, action: PayloadAction<Array<EachDay[]>>) => [...action.payload],
+  },
+});
+
 const store = configureStore({
   reducer: {
     auth: authSlice.reducer,
     filter: filterSlice.reducer,
     mentorRegistor: mentorRegisterSlice.reducer,
+    schedule: scheduleSlice.reducer,
   },
 });
 
@@ -144,4 +178,5 @@ export const useAppDispatch: () => AppDispatch = useDispatch;
 export const { login, logout } = authSlice.actions;
 export const { setJobFolder, setJob, removeJob, setCompany, removeCompany, setOrder } = filterSlice.actions;
 export const { setMentorRegister } = mentorRegisterSlice.actions;
+export const { setSchedule } = scheduleSlice.actions;
 export default store;

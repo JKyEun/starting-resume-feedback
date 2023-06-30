@@ -176,6 +176,9 @@
         .time-picker {
           display: flex;
           flex-direction: column;
+          .relative {
+            position: relative;
+          }
           div {
             display: flex;
             flex-wrap: wrap;
@@ -198,6 +201,10 @@
             margin: 0 8px 8px 0;
           }
           .add {
+            display: none;
+          }
+          .add:last-child {
+            display: inline;
             width: 60px;
             height: 46px;
             padding: 12px;
@@ -206,6 +213,17 @@
             color: #000;
             text-align: center;
             cursor: pointer;
+          }
+          .remove {
+            position: absolute;
+            color: white;
+            background-color: #000;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            text-align: center;
+            line-height: 16px;
+            left: 110px;
           }
         }
       }
