@@ -88,7 +88,6 @@ type MentorRegistorState = {
   target: string;
   prepare: string;
   curriculum: string;
-  rule: string;
   time: string;
   cost: number;
   schedules: object[];
@@ -112,7 +111,6 @@ const initialMentorRegistorState: MentorRegistorState = {
   target: '',
   prepare: '',
   curriculum: '',
-  rule: '',
   time: '',
   cost: 0,
   schedules: [],

@@ -15,7 +15,7 @@ export default function MentoringMethod() {
     const info = {
       curriculum: curriculum.current?.value,
       time: time.current?.value,
-      price: price.current?.value,
+      cost: Number(price.current?.value),
       schedules: [
         { day: '월', time: schedule[0] },
         { day: '화', time: schedule[1] },

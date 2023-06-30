@@ -43,13 +43,23 @@ export default function MentorRegisterPage() {
       });
       console.log(res1.data);
 
+      console.log(info);
+
       const res = await axios.post('http://43.201.17.248:8080/mentor/info', info, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('JWT_TOKEN')}`,
         },
       });
 
-      console.log(res.data);
+      // const res = await fetch('http://43.201.17.248:8080/mentor/info', {
+      //   method: 'POST',
+      //   headers: {
+      //     Authorization: `Bearer ${localStorage.getItem('JWT_TOKEN')}`,
+      //     'Content-type': 'application/json',
+      //   },
+      //   body: JSON.stringify(info),
+      // });
+      console.log(await res.data);
 
       if (res.status === 200) {
         navigate('/');
