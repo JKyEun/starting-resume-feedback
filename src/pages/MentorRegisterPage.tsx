@@ -32,6 +32,7 @@ export default function MentorRegisterPage() {
 
   const saveInfo = () => {
     localStorage.setItem('MENTOR_REGISTER_INFO', JSON.stringify(info));
+    alert('작성된 정보가 저장되었습니다.');
   };
 
   const submitInfo = async () => {
