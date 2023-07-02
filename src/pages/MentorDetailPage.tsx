@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import '../style/mentorDetailPage.scss';
 import { useParams } from 'react-router';
-import axios from 'axios';
 import MentoringReview from '../components/MentorDetailPage/MentoringReview';
 import DetailCard from '../components/MentorDetailPage/DetailCard';
+import { getMentorDetail } from '../apis/detail';
 
 export default function MentorDetailPage() {
   const { id } = useParams();
@@ -11,12 +11,8 @@ export default function MentorDetailPage() {
 
   useEffect(() => {
     const getInfo = async () => {
-      try {
-        const res = await axios.get(`http://43.201.17.248:8080/mentor/${id}`);
-        setMentorInfo(res.data);
-      } catch (err) {
-        console.error(err);
-      }
+      const res = await getMentorDetail(id);
+      setMentorInfo(res);
     };
 
     getInfo();
