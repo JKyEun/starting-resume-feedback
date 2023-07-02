@@ -37,7 +37,6 @@ export default function MentorCard({
           src={profileImg === null ? '/images/basic-img.svg' : profileImg}
           alt="프로필 이미지"
         />
-        <img className="bookmark" src="/images/bookmark.svg" alt="북마크" />
       </div>
       <span className="mentor-name">{nickname}</span>
       <span className="mentor-company">{company}</span>
