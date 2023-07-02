@@ -25,7 +25,6 @@ export default function SubHeader() {
       <div className="sub-header-container">
         <div className="menu-container">
           <span className="menu selected">멘토 찾기</span>
-          <span className="menu">멘토링 현황</span>
         </div>
         <div className="search-area">
           <img src="/images/search.svg" alt="돋보기" />
