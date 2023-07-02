@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router';
 import '../style/mentorRegisterPage.scss';
 import BasicInfo from '../components/MentorRegisterPage/BasicInfo';
 import MentoringInfo from '../components/MentorRegisterPage/MentoringInfo';
 import MentoringMethod from '../components/MentorRegisterPage/MentoringMethod';
 import { useAppSelector } from '../store';
+import { changeRole, setMentorInfo } from '../apis/register';
 
 export default function MentorRegisterPage() {
   const [curScroll, setCurScroll] = useState<number>(1);
   const info = useAppSelector((state) => state.mentorRegistor);
   const navigate = useNavigate();
-  const INFO_SCROLL_NUM = 1135;
-  const METHOD_SCROLL_NUM = 2087;
+  const INFO_SCROLL_NUM = 1242;
+  const METHOD_SCROLL_NUM = 2195;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,25 +36,11 @@ export default function MentorRegisterPage() {
   };
 
   const submitInfo = async () => {
-    try {
-      await axios.post('http://43.201.17.248:8080/role', null, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('JWT_TOKEN')}`,
-        },
-      });
+    await changeRole();
+    const res = (await setMentorInfo(info)) || { status: 0 };
 
-      const res = await axios.post('http://43.201.17.248:8080/mentor/info', info, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('JWT_TOKEN')}`,
-        },
-      });
-
-      if (res.status === 200) {
-        navigate('/');
-      }
-    } catch (err) {
-      console.error(err);
-      alert('필수 값을 모두 입력하세요');
+    if (res.status === 200) {
+      navigate('/');
     }
   };
 

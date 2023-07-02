@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router';
+import { USER_ID } from '../../util/constant';
 
 export default function DetailCard({ mentorInfo }: { mentorInfo: any }) {
   const { id } = useParams();
@@ -40,7 +41,15 @@ export default function DetailCard({ mentorInfo }: { mentorInfo: any }) {
           </span>
           <span>00명</span>
         </div>
-        <div onClick={() => navigate(`/${id}/apply`)} className="apply">
+        <div
+          onClick={() => {
+            if (USER_ID) {
+              navigate(`/${id}/apply`);
+            } else {
+              alert('로그인이 필요한 서비스입니다.');
+            }
+          }}
+          className="apply">
           멘토링 신청하기
         </div>
       </div>

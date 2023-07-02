@@ -30,3 +30,31 @@ export const changeMentorImg = async (formData: FormData) => {
     console.error(err);
   }
 };
+
+export const changeRole = async () => {
+  try {
+    await api.post('/role', null, {
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+      },
+    });
+  } catch (err) {
+    console.error(err);
+    alert('멘토 등록 오류');
+  }
+};
+
+export const setMentorInfo = async (info: object) => {
+  try {
+    const res = await api.post('/mentor/info', info, {
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+      },
+    });
+
+    return res;
+  } catch (err) {
+    console.error(err);
+    alert('필수 값을 모두 입력하세요');
+  }
+};
