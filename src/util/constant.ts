@@ -267,3 +267,6 @@ export const style2 = {
     color: isSelected ? 'black' : 'black',
   }),
 };
+
+export const TOKEN = localStorage.getItem('JWT_TOKEN');
+export const USER_ID = localStorage.getItem('USER_ID');

@@ -1,6 +1,7 @@
 import React from 'react';
 import '../../style/mainBanner.scss';
 import { useNavigate } from 'react-router';
+import { USER_ID } from '../../util/constant';
 
 export default function MainBanner() {
   const randomNumber = Math.floor(Math.random() * 3);
@@ -11,7 +12,7 @@ export default function MainBanner() {
     if (randomNumber === 0) {
       navigate('/register');
     } else if (randomNumber === 2) {
-      if (localStorage.getItem('USER_ID')) {
+      if (USER_ID) {
         navigate('/login');
       } else {
         window.location.reload();
