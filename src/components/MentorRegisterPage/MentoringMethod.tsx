@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { setMentorRegister, useAppDispatch, useAppSelector } from '../../store';
 import AvailableTime from './AvailableTime';
 
@@ -14,21 +14,31 @@ export default function MentoringMethod() {
   const sendInfo = () => {
     const info = {
       curriculum: curriculum.current?.value,
-      time: time.current?.value.toString(),
-      price: price.current?.value,
+      time: time.current?.value,
+      cost: Number(price.current?.value),
       schedules: [
-        { day: '월', time: schedule[0] },
-        { day: '화', time: schedule[1] },
-        { day: '수', time: schedule[2] },
-        { day: '목', time: schedule[3] },
-        { day: '금', time: schedule[4] },
-        { day: '토', time: schedule[5] },
-        { day: '일', time: schedule[6] },
+        { day: '월', time: schedule[0].map((el) => el.time) },
+        { day: '화', time: schedule[1].map((el) => el.time) },
+        { day: '수', time: schedule[2].map((el) => el.time) },
+        { day: '목', time: schedule[3].map((el) => el.time) },
+        { day: '금', time: schedule[4].map((el) => el.time) },
+        { day: '토', time: schedule[5].map((el) => el.time) },
+        { day: '일', time: schedule[6].map((el) => el.time) },
       ],
     };
 
     dispatch(setMentorRegister(info));
   };
+
+  useEffect(() => {
+    const mentorInfo = localStorage.getItem('MENTOR_REGISTER_INFO');
+    if (mentorInfo) {
+      const parsedMentorInfo = JSON.parse(mentorInfo);
+      if (time.current) time.current.value = parsedMentorInfo.time;
+      if (curriculum.current) curriculum.current.value = parsedMentorInfo.curriculum;
+      if (price.current) price.current.value = parsedMentorInfo.price;
+    }
+  }, []);
 
   return (
     <div className="mentoring-method">

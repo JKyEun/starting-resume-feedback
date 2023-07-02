@@ -1,7 +1,9 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../style/mentoringApplyPage.scss';
 import axios from 'axios';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
+import EachTime from '../components/MentoringApplyPage/EachTime';
+import { useAppSelector } from '../store';
 
 export default function MentoringApplyPage() {
   const [moreLink, setMoreLink] = useState<number[]>([]);
@@ -12,10 +14,21 @@ export default function MentoringApplyPage() {
   const email = useRef<HTMLInputElement>(null);
   const content = useRef<HTMLTextAreaElement>(null);
   const [url, setUrl] = useState<string[]>([]);
+  const [urlExplain, setUrlExplain] = useState<string[]>(['스타팅 이력서']);
+  const [mentorInfo, setMentorInfo] = useState<any>({});
+  const schedule = useAppSelector((state) => state.schedule);
+  const navigate = useNavigate();
 
   const onUrlChange = (e: any, idx: any) => {
-    url[idx] = e.target.value;
-    setUrl(url);
+    const updatedUrl = [...url];
+    updatedUrl[idx] = e.target.value;
+    setUrl(updatedUrl);
+  };
+
+  const onUrlExplainChange = (e: any, idx: any) => {
+    const updatedUrlExplain = [...urlExplain];
+    updatedUrlExplain[idx] = e.target.value;
+    setUrlExplain(updatedUrlExplain);
   };
 
   const convertModal = () => {
@@ -25,12 +38,25 @@ export default function MentoringApplyPage() {
   const sendEmail = async () => {
     setModalOpen((cur) => !cur);
 
+    const urls = url.map((link, index) => ({
+      link,
+      caption: urlExplain[index] || '',
+    }));
+
     const requestForm = {
       phone: phone.current?.value,
       email: email.current?.value,
-      url,
+      url: urls,
       content: content.current?.value,
-      schedules: [],
+      schedules: [
+        { day: '월', time: schedule[0].filter((el) => el.time !== '').map((el) => el.time) },
+        { day: '화', time: schedule[1].filter((el) => el.time !== '').map((el) => el.time) },
+        { day: '수', time: schedule[2].filter((el) => el.time !== '').map((el) => el.time) },
+        { day: '목', time: schedule[3].filter((el) => el.time !== '').map((el) => el.time) },
+        { day: '금', time: schedule[4].filter((el) => el.time !== '').map((el) => el.time) },
+        { day: '토', time: schedule[5].filter((el) => el.time !== '').map((el) => el.time) },
+        { day: '일', time: schedule[6].filter((el) => el.time !== '').map((el) => el.time) },
+      ],
     };
 
     try {
@@ -40,11 +66,27 @@ export default function MentoringApplyPage() {
         },
       });
 
-      console.log(res.data);
+      if (res.status >= 200 && res.status < 300) {
+        alert('신청이 완료되었습니다. 멘토에게서 연락이 올거에요!');
+        navigate('/');
+      }
     } catch (err) {
       console.error(err);
     }
   };
+
+  useEffect(() => {
+    const getInfo = async () => {
+      try {
+        const res = await axios.get(`http://43.201.17.248:8080/mentor/${id}`);
+        setMentorInfo(res.data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    getInfo();
+  }, []);
 
   return (
     <div className="page">
@@ -56,34 +98,14 @@ export default function MentoringApplyPage() {
               가능한 일정을 선택해 주세요 <span>*</span>
             </div>
             <div className="time-picker">
-              <div>
-                <span className="day">월</span>
-                <span>18:00</span>
-              </div>
-              <div>
-                <span className="day">화</span>
-                <span>18:00</span>
-              </div>
-              <div>
-                <span className="day">수</span>
-                <span>18:00</span>
-              </div>
-              <div>
-                <span className="day">목</span>
-                <span>18:00</span>
-              </div>
-              <div>
-                <span className="day">금</span>
-                <span>18:00</span>
-              </div>
-              <div>
-                <span className="day">토</span>
-                <span>18:00</span>
-              </div>
-              <div>
-                <span className="day">일</span>
-                <span>18:00</span>
-              </div>
+              {mentorInfo.schedules?.map((eachDay: any, dayIdx: number) => (
+                <div key={eachDay.day}>
+                  <span>{eachDay.day}</span>
+                  {eachDay.time?.map((time: any, timeIdx: number) => (
+                    <EachTime key={time} time={time} dayIdx={dayIdx} timeIdx={timeIdx} />
+                  ))}
+                </div>
+              ))}
             </div>
           </div>
           <div className="phone">
@@ -91,7 +113,7 @@ export default function MentoringApplyPage() {
               연락 가능한 연락처 <span>*</span>
             </div>
             <div>
-              <input type="text" />
+              <input ref={phone} type="text" />
             </div>
           </div>
           <div className="email">
@@ -99,7 +121,7 @@ export default function MentoringApplyPage() {
               연락 가능한 이메일 <span>*</span>
             </div>
             <div>
-              <input type="text" />
+              <input ref={email} type="text" />
             </div>
           </div>
           <div className="url">
@@ -112,18 +134,25 @@ export default function MentoringApplyPage() {
             {moreLink.map((el, idx) => (
               <div key={el} className="more-link">
                 <input
-                  onChange={(e) => onUrlChange(e, idx + 1)}
                   value={url[idx + 1]}
+                  onChange={(e) => onUrlChange(e, idx + 1)}
                   placeholder="관련 링크를 입력해주세요"
                   type="text"
                 />
-                <input placeholder="링크를 소개해주세요" type="text" />
+                <input
+                  value={urlExplain[idx + 1]}
+                  onChange={(e) => onUrlExplainChange(e, idx + 1)}
+                  placeholder="링크를 소개해주세요"
+                  type="text"
+                />
                 <div
                   onClick={() => {
-                    const newArr = moreLink.filter((filterEl) => filterEl !== el);
-                    setMoreLink(newArr);
-                    const newArr2 = url.filter((urlEl) => urlEl !== url[idx + 1]);
-                    setUrl(newArr2);
+                    const updatedMoreLink = moreLink.filter((filterEl) => filterEl !== el);
+                    setMoreLink(updatedMoreLink);
+                    const updatedUrl = url.filter((el, i) => i !== idx + 1);
+                    setUrl(updatedUrl);
+                    const updatedUrlExplain = urlExplain.filter((el, i) => i !== idx + 1);
+                    setUrlExplain(updatedUrlExplain);
                   }}>
                   <img src="/images/cancel.svg" alt="삭제" />
                 </div>
@@ -145,7 +174,7 @@ export default function MentoringApplyPage() {
               멘토링 받고 싶은 내용 <span>*</span>
             </div>
             <div>
-              <textarea></textarea>
+              <textarea ref={content}></textarea>
             </div>
           </div>
           <div onClick={convertModal} className="pay">
@@ -172,8 +201,10 @@ export default function MentoringApplyPage() {
                   <br />
                   결제 QR은 마이 멘토링에서 재확인 가능
                 </div>
-                <div className="QR"></div>
-                <div className="price">00,000원</div>
+                <div className="QR">
+                  <img src="/images/test-QR.jpg" alt="QR코드" />
+                </div>
+                <div className="price">{mentorInfo.cost}원</div>
                 <div className="btns">
                   <div onClick={convertModal} className="close">
                     결제취소

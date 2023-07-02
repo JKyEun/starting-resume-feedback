@@ -41,9 +41,15 @@
           }
           .day {
             margin-right: 8px;
+            cursor: default;
           }
           div {
             margin: 0 0 30px 0;
+            cursor: pointer;
+          }
+          .clicked {
+            color: #1a7cff;
+            border: 1px solid #1a7cff;
           }
           div:last-child {
             margin: 0;
@@ -150,7 +156,10 @@
         .QR {
           width: 200px;
           height: 200px;
-          border: 1px solid black;
+          img {
+            width: inherit;
+            height: inherit;
+          }
         }
         .price {
           font-size: 24px;

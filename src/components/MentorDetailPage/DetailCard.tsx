@@ -7,8 +7,12 @@ export default function DetailCard({ mentorInfo }: { mentorInfo: any }) {
 
   return (
     <div className="detail-card">
-      <img className="profile-img" src="/images/demoImg.svg" alt="프로필 이미지" />
-      <span className="badge">신규</span>
+      <img
+        className="profile-img"
+        src={mentorInfo.profile === '' || mentorInfo.profile === null ? '/images/basic-img.svg' : mentorInfo.profile}
+        alt="프로필 이미지"
+      />
+      <span className="badge">{mentorInfo.badges && mentorInfo.badges[mentorInfo.badges.length - 1]}</span>
       <div className="info">
         <div className="nickname">{mentorInfo.mentor?.nickname}</div>
         <div className="company">{mentorInfo.mentor?.company?.name}</div>
@@ -18,7 +22,7 @@ export default function DetailCard({ mentorInfo }: { mentorInfo: any }) {
       <div className="num">
         <div>
           <div>멘토링 횟수</div>
-          <div>{mentorInfo.cost}회</div>
+          <div>0회</div>
         </div>
         <div>
           <div>후기 수</div>

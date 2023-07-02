@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../style/signInPage.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { KAKAO_AUTH_URL } from '../util/constant';
 
 export default function SignInPage() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem('USER_ID')) {
+      navigate('/');
+    }
+  }, []);
+
   return (
     <div className="signin-page">
       <div className="explain-text">
