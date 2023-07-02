@@ -8,6 +8,7 @@ export default function BasicInfo() {
   const [jobFolder, setJobFolder] = useState<any>('직군을 선택하세요');
   const [isDisabled, setDisabled] = useState<boolean>(true);
   const [specificJob, setSpecificJob] = useState<any>(null);
+  const [subjob, setSubjob] = useState<string>('직무를 선택하세요');
   const fileInput = useRef<HTMLInputElement>(null);
   const imgInput = useRef<HTMLInputElement>(null);
   const [fileName, setFileName] = useState<string>('');
@@ -15,13 +16,16 @@ export default function BasicInfo() {
   const nickname = useRef<HTMLInputElement>(null);
   const company = useRef<HTMLInputElement>(null);
   const companyType = useRef<any>(null);
-  const jobSpecific = useRef<any>(null);
   const year = useRef<any>(null);
   const bankName = useRef<HTMLInputElement>(null);
   const account = useRef<HTMLInputElement>(null);
   const accountName = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
   const [imgUrl, setImgUrl] = useState<string>('');
+  const mentorInfo = localStorage.getItem('MENTOR_REGISTER_INFO');
+  const parsedMentorInfo = mentorInfo && JSON.parse(mentorInfo);
+
+  console.log(parsedMentorInfo);
 
   const sendFile = async () => {
     const formData = new FormData();
@@ -51,7 +55,7 @@ export default function BasicInfo() {
       company: company.current?.value,
       companyType: companyType.current?.props?.value?.label,
       job: jobFolder,
-      subjob: jobSpecific.current?.props?.value?.label,
+      subjob,
       year: year.current?.props?.value?.label,
       bank: bankName.current?.value,
       bankNumber: account.current?.value,
@@ -61,16 +65,27 @@ export default function BasicInfo() {
     dispatch(setMentorRegister(basicInfo));
   };
 
+  const sendJobFolder = (jobFolder: string) => {
+    const jobFolderInfo = {
+      job: jobFolder,
+    };
+    dispatch(setMentorRegister(jobFolderInfo));
+  };
+
   useEffect(() => {
-    const mentorInfo = localStorage.getItem('MENTOR_REGISTER_INFO');
-    if (mentorInfo) {
-      const parsedMentorInfo = JSON.parse(mentorInfo);
+    if (parsedMentorInfo) {
       if (name.current) name.current.value = parsedMentorInfo.name;
       if (nickname.current) nickname.current.value = parsedMentorInfo.nickname;
       if (company.current) company.current.value = parsedMentorInfo.company;
       if (bankName.current) bankName.current.value = parsedMentorInfo.bank;
       if (account.current) account.current.value = parsedMentorInfo.bankNumber;
       if (accountName.current) accountName.current.value = parsedMentorInfo.bankOwner;
+      if (parsedMentorInfo.job !== '직군을 선택하세요') {
+        setDisabled(false);
+        setJobFolder(parsedMentorInfo.job);
+        setSpecificJob(getSpecificJob(parsedMentorInfo.job));
+      }
+      if (parsedMentorInfo.subjob !== '직무를 선택하세요') setSubjob(parsedMentorInfo.subjob);
     }
   }, []);
 
@@ -126,10 +141,16 @@ export default function BasicInfo() {
         </div>
         <div>
           <Select
-            onChange={sendInfo}
+            onBlur={sendInfo}
             ref={companyType}
             placeholder="기업 종류를 선택해주세요"
             styles={style2}
+            defaultValue={
+              parsedMentorInfo &&
+              companyTypeList.filter(
+                (el: { value: string; label: string }) => el.value === parsedMentorInfo.companyType
+              )[0]
+            }
             theme={(theme) => ({
               ...theme,
               borderRadius: 8,
@@ -151,7 +172,8 @@ export default function BasicInfo() {
               setDisabled(false);
               setJobFolder(el?.value);
               setSpecificJob(getSpecificJob(el?.value));
-              sendInfo();
+              setSubjob('직무를 선택하세요');
+              sendJobFolder(el?.value);
             }}
             styles={style}
             theme={(theme) => ({
@@ -165,15 +187,17 @@ export default function BasicInfo() {
             isSearchable={false}
           />
           <Select
-            onChange={sendInfo}
-            ref={jobSpecific}
-            placeholder="직무를 선택하세요"
+            onBlur={sendInfo}
+            onChange={(el: any) => {
+              setSubjob(el?.value);
+            }}
             styles={style}
             theme={(theme) => ({
               ...theme,
               borderRadius: 8,
               colors: { ...theme.colors, primary25: '#f4f4f5', primary: '#f4f4f5', primary50: '#f4f4f5' },
             })}
+            value={{ value: subjob, label: subjob }}
             className="job-specific"
             isDisabled={isDisabled}
             options={specificJob}
@@ -187,10 +211,14 @@ export default function BasicInfo() {
         </div>
         <div>
           <Select
-            onChange={sendInfo}
+            onBlur={sendInfo}
             ref={year}
             placeholder="경력기간을 선택하세요"
             styles={style2}
+            defaultValue={
+              parsedMentorInfo &&
+              mentoYearSelect.filter((el: { value: string; label: string }) => el.value === parsedMentorInfo.year)[0]
+            }
             theme={(theme) => ({
               ...theme,
               borderRadius: 8,
