@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import '../style/mentoringApplyPage.scss';
-import axios from 'axios';
 import { useNavigate, useParams } from 'react-router';
 import EachTime from '../components/MentoringApplyPage/EachTime';
 import { useAppSelector } from '../store';
+import { applyMentoring } from '../apis/apply';
+import { getMentorDetail } from '../apis/detail';
 
 export default function MentoringApplyPage() {
   const [moreLink, setMoreLink] = useState<number[]>([]);
@@ -59,30 +60,18 @@ export default function MentoringApplyPage() {
       ],
     };
 
-    try {
-      const res = await axios.post(`http://43.201.17.248:8080/mentoring/${id}`, requestForm, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('JWT_TOKEN')}`,
-        },
-      });
+    const res = (await applyMentoring(id, requestForm)) || { status: 0 };
 
-      if (res.status >= 200 && res.status < 300) {
-        alert('신청이 완료되었습니다. 멘토에게서 연락이 올거에요!');
-        navigate('/');
-      }
-    } catch (err) {
-      console.error(err);
+    if (res.status >= 200 && res.status < 300) {
+      alert('신청이 완료되었습니다. 멘토에게서 연락이 올거에요!');
+      navigate('/');
     }
   };
 
   useEffect(() => {
     const getInfo = async () => {
-      try {
-        const res = await axios.get(`http://43.201.17.248:8080/mentor/${id}`);
-        setMentorInfo(res.data);
-      } catch (err) {
-        console.error(err);
-      }
+      const res = await getMentorDetail(id);
+      setMentorInfo(res);
     };
 
     getInfo();
@@ -204,7 +193,7 @@ export default function MentoringApplyPage() {
                 <div className="QR">
                   <img src="/images/test-QR.jpg" alt="QR코드" />
                 </div>
-                <div className="price">{mentorInfo.cost}원</div>
+                <div className="price">{mentorInfo.cost.toLocaleString()}원</div>
                 <div className="btns">
                   <div onClick={convertModal} className="close">
                     결제취소
