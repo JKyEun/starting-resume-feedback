@@ -216,14 +216,21 @@
           }
           .remove {
             position: absolute;
-            color: white;
-            background-color: #000;
+            background-color: #fff;
+            border: 1px solid black;
             border-radius: 50%;
             width: 16px;
             height: 16px;
             text-align: center;
             line-height: 16px;
             left: 110px;
+            top: -16px;
+            cursor: pointer;
+            img {
+              position: absolute;
+              left: 0px;
+              top: 0px;
+            }
           }
         }
       }

@@ -67,7 +67,7 @@ export default function AvailableTime({
       <input className="time" type="time" value={inputValue} onChange={onInputChange} onBlur={updateTimeValues} />
       {scheduleInStore[dayIdx].length !== 1 && (
         <span onClick={deleteTimeValues} className="remove">
-          X
+          <img src="/images/close.svg" alt="삭제" />
         </span>
       )}
       {scheduleInStore[dayIdx].length - 1 === timeIdx && (
