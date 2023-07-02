@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Select from 'react-select';
-import axios from 'axios';
 import { classArr, companyTypeList, getSpecificJob, mentoYearSelect, style, style2 } from '../../util/constant';
 import { setMentorRegister, useAppDispatch } from '../../store';
+import { changeMentorFile, changeMentorImg } from '../../apis/register';
 
 export default function BasicInfo() {
   const [jobFolder, setJobFolder] = useState<any>('직군을 선택하세요');
@@ -29,17 +29,8 @@ export default function BasicInfo() {
     if (files.length > 0) {
       formData.append('resume', files[0]);
     }
-    try {
-      await axios.post('http://43.201.17.248:8080/mentor/resume', formData, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('JWT_TOKEN')}`,
-          'Content-Type': 'multipart/form-data',
-        },
-        withCredentials: true,
-      });
-    } catch (err) {
-      console.error(err);
-    }
+
+    await changeMentorFile(formData);
   };
 
   const sendImg = async () => {
@@ -48,18 +39,9 @@ export default function BasicInfo() {
     if (files.length > 0) {
       formData.append('image', files[0]);
     }
-    try {
-      const res = await axios.post('http://43.201.17.248:8080/mentor/profile-image', formData, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('JWT_TOKEN')}`,
-          'Content-Type': 'multipart/form-data',
-        },
-        withCredentials: true,
-      });
-      setImgUrl(res.data.url);
-    } catch (err) {
-      console.error(err);
-    }
+
+    const res = await changeMentorImg(formData);
+    setImgUrl(res.url);
   };
 
   const sendInfo = () => {

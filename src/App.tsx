@@ -9,13 +9,14 @@ import { login, useAppDispatch } from './store';
 import MentorregisterPage from './pages/MentorRegisterPage';
 import MentorDetailPage from './pages/MentorDetailPage';
 import MentoringApplyPage from './pages/MentoringApplyPage';
+import { TOKEN } from './util/constant';
 
 function App() {
   const location = useLocation();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (localStorage.getItem('JWT_TOKEN')) {
+    if (TOKEN) {
       dispatch(login());
     }
   }, [dispatch]);
