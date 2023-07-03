@@ -33,6 +33,8 @@ export default function MentoringInfo() {
       if (concept.current) concept.current.value = parsedMentorInfo.concept;
       if (target.current) target.current.value = parsedMentorInfo.target;
       if (prepare.current) prepare.current.value = parsedMentorInfo.prepare;
+
+      sendInfo();
     }
   }, []);
 
