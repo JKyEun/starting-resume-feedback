@@ -11,19 +11,19 @@ export default function MentoringMethod() {
   const schedule = useAppSelector((state) => state.schedule);
   const scheduleArr = Object.values(schedule);
 
-  const sendInfo = () => {
+  const sendInfo = (updatedSchedule: any = schedule) => {
     const info = {
       curriculum: curriculum.current?.value,
       time: time.current?.value,
       cost: Number(price.current?.value),
       schedules: [
-        { day: '월', time: schedule[0].map((el) => el.time) },
-        { day: '화', time: schedule[1].map((el) => el.time) },
-        { day: '수', time: schedule[2].map((el) => el.time) },
-        { day: '목', time: schedule[3].map((el) => el.time) },
-        { day: '금', time: schedule[4].map((el) => el.time) },
-        { day: '토', time: schedule[5].map((el) => el.time) },
-        { day: '일', time: schedule[6].map((el) => el.time) },
+        { day: '월', time: updatedSchedule[0].map((el: any) => el.time) },
+        { day: '화', time: updatedSchedule[1].map((el: any) => el.time) },
+        { day: '수', time: updatedSchedule[2].map((el: any) => el.time) },
+        { day: '목', time: updatedSchedule[3].map((el: any) => el.time) },
+        { day: '금', time: updatedSchedule[4].map((el: any) => el.time) },
+        { day: '토', time: updatedSchedule[5].map((el: any) => el.time) },
+        { day: '일', time: updatedSchedule[6].map((el: any) => el.time) },
       ],
     };
 
@@ -36,7 +36,9 @@ export default function MentoringMethod() {
       const parsedMentorInfo = JSON.parse(mentorInfo);
       if (time.current) time.current.value = parsedMentorInfo.time;
       if (curriculum.current) curriculum.current.value = parsedMentorInfo.curriculum;
-      if (price.current) price.current.value = parsedMentorInfo.price;
+      if (price.current) price.current.value = parsedMentorInfo.cost;
+
+      sendInfo();
     }
   }, []);
 

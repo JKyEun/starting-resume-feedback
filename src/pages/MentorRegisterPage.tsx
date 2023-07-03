@@ -10,6 +10,7 @@ import { changeRole, setMentorInfo } from '../apis/register';
 export default function MentorRegisterPage() {
   const [curScroll, setCurScroll] = useState<number>(1);
   const info = useAppSelector((state) => state.mentorRegistor);
+  const schedule = useAppSelector((state) => state.schedule);
   const navigate = useNavigate();
   const INFO_SCROLL_NUM = 1242;
   const METHOD_SCROLL_NUM = 2195;
@@ -32,6 +33,7 @@ export default function MentorRegisterPage() {
 
   const saveInfo = () => {
     localStorage.setItem('MENTOR_REGISTER_INFO', JSON.stringify(info));
+    localStorage.setItem('MENTOR_REGISTER_SCHEDULE', JSON.stringify(schedule));
     alert('작성된 정보가 저장되었습니다.');
   };
 

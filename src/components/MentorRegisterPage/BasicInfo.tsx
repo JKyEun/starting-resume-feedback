@@ -80,12 +80,15 @@ export default function BasicInfo() {
       if (bankName.current) bankName.current.value = parsedMentorInfo.bank;
       if (account.current) account.current.value = parsedMentorInfo.bankNumber;
       if (accountName.current) accountName.current.value = parsedMentorInfo.bankOwner;
-      if (parsedMentorInfo.job !== '직군을 선택하세요') {
+      if (parsedMentorInfo.job !== '직군을 선택하세요' && parsedMentorInfo.job !== '') {
         setDisabled(false);
         setJobFolder(parsedMentorInfo.job);
         setSpecificJob(getSpecificJob(parsedMentorInfo.job));
       }
-      if (parsedMentorInfo.subjob !== '직무를 선택하세요') setSubjob(parsedMentorInfo.subjob);
+      if (parsedMentorInfo.subjob !== '직무를 선택하세요' && parsedMentorInfo.subjob !== '')
+        setSubjob(parsedMentorInfo.subjob);
+
+      sendInfo();
     }
   }, []);
 
