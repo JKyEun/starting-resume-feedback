@@ -25,8 +25,6 @@ export default function BasicInfo() {
   const mentorInfo = localStorage.getItem('MENTOR_REGISTER_INFO');
   const parsedMentorInfo = mentorInfo && JSON.parse(mentorInfo);
 
-  console.log(parsedMentorInfo);
-
   const sendFile = async () => {
     const formData = new FormData();
     const files = fileInput.current?.files as FileList;

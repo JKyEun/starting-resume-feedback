@@ -81,13 +81,7 @@ export default function MentoringMethod() {
               </span>
               <span>
                 {scheduleArr[dayIdx].map((schedule, timeIdx) => (
-                  <AvailableTime
-                    key={schedule.id}
-                    sendInfo={sendInfo}
-                    schedule={schedule}
-                    dayIdx={dayIdx}
-                    timeIdx={timeIdx}
-                  />
+                  <AvailableTime key={schedule.id} sendInfo={sendInfo} dayIdx={dayIdx} timeIdx={timeIdx} />
                 ))}
               </span>
             </div>

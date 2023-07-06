@@ -3,20 +3,18 @@ import { setSchedule, useAppDispatch, useAppSelector } from '../../store';
 
 export default function AvailableTime({
   sendInfo,
-  schedule,
   dayIdx,
   timeIdx,
 }: {
   sendInfo: (updatedSchdule: any) => void;
-  schedule: { time: string; id: number };
   dayIdx: number;
   timeIdx: number;
 }) {
   const dispatch = useAppDispatch();
   const scheduleInStore = useAppSelector((state) => state.schedule);
-  const [inputValue, setInputValue] = useState<string>(schedule.time);
-  // const savedSchedule = useRef(localStorage.getItem('MENTOR_REGISTER_SCHEDULE'));
-  // const parsedSavedSchedule = savedSchedule.current ? JSON.parse(savedSchedule.current) : null;
+  // const savedSchedule = localStorage.getItem('MENTOR_REGISTER_SCHEDULE');
+  // const parsedSavedSchedule = savedSchedule ? JSON.parse(savedSchedule) : null;
+  const [inputValue, setInputValue] = useState<string>(scheduleInStore[dayIdx][timeIdx].time);
 
   const updateTimeValues = () => {
     const updatedSchedule = scheduleInStore.map((day, index) => {
@@ -63,14 +61,6 @@ export default function AvailableTime({
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
-
-  // useEffect(() => {
-  //   if (savedSchedule && parsedSavedSchedule[dayIdx][timeIdx]) {
-  //     if (parsedSavedSchedule[dayIdx][timeIdx].time !== inputValue) {
-  //       setInputValue(parsedSavedSchedule[dayIdx][timeIdx].time);
-  //     }
-  //   }
-  // }, []);
 
   return (
     <span className="relative">
