@@ -8,7 +8,7 @@ export default function Loading() {
       <Oval
         height={80}
         width={80}
-        color="#605cff"
+        color="#1a7cff"
         wrapperStyle={{}}
         wrapperClass=""
         visible
