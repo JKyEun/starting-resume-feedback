@@ -12,8 +12,6 @@ export default function AvailableTime({
 }) {
   const dispatch = useAppDispatch();
   const scheduleInStore = useAppSelector((state) => state.schedule);
-  // const savedSchedule = localStorage.getItem('MENTOR_REGISTER_SCHEDULE');
-  // const parsedSavedSchedule = savedSchedule ? JSON.parse(savedSchedule) : null;
   const [inputValue, setInputValue] = useState<string>(scheduleInStore[dayIdx][timeIdx].time);
 
   const updateTimeValues = () => {

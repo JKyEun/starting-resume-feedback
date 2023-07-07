@@ -10,7 +10,6 @@ import MentorregisterPage from './pages/MentorRegisterPage';
 import MentorDetailPage from './pages/MentorDetailPage';
 import MentoringApplyPage from './pages/MentoringApplyPage';
 import { TOKEN } from './util/constant';
-import MentorRegisterPageTest from './pages/MentorRegisterPageTest';
 
 function App() {
   const location = useLocation();
@@ -33,7 +32,6 @@ function App() {
         <Route path="/:id/apply" element={<MentoringApplyPage />} />
         <Route path="/register" element={<MentorregisterPage />} />
         <Route path="/oauth/callback/kakao" element={<KakaoRedirectHandler />} />
-        <Route path="/test" element={<MentorRegisterPageTest />} />
       </Routes>
     </div>
   );
