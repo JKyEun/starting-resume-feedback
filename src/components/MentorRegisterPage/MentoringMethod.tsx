@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { setMentorRegister, useAppDispatch, useAppSelector } from '../../store';
+import { setMentorRegister, setSchedule, useAppDispatch, useAppSelector } from '../../store';
 import AvailableTime from './AvailableTime';
 
 export default function MentoringMethod() {
@@ -10,6 +10,8 @@ export default function MentoringMethod() {
   const dispatch = useAppDispatch();
   const schedule = useAppSelector((state) => state.schedule);
   const scheduleArr = Object.values(schedule);
+  const savedSchedule = localStorage.getItem('MENTOR_REGISTER_SCHEDULE');
+  const parsedSavedSchedule = savedSchedule ? JSON.parse(savedSchedule) : null;
 
   const sendInfo = (updatedSchedule: any = schedule) => {
     const info = {
@@ -39,6 +41,11 @@ export default function MentoringMethod() {
       if (price.current) price.current.value = parsedMentorInfo.cost;
 
       sendInfo();
+    }
+
+    if (savedSchedule) {
+      dispatch(setSchedule(parsedSavedSchedule));
+      sendInfo(parsedSavedSchedule);
     }
   }, []);
 
